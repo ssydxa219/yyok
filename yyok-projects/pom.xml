@@ -11,7 +11,7 @@
 
     <groupId>com.yyokay.project</groupId>
     <artifactId>yyok-projects</artifactId>
-
+    <packaging>pom</packaging>
     <name>yyok-projects</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
