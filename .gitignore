@@ -46,7 +46,7 @@ hs_err_pid*
 #from eclipse project configure
 /.settings/
 /test/
-
+test/
 # built application files
 *.apk
 *.ap_
