@@ -17,6 +17,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>yyok-share-util-spider</module>
+        <module>yyok-share-util-spring</module>
     </modules>
 
     <properties>
