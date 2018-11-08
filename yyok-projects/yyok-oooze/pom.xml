@@ -9,7 +9,7 @@
     <groupId>com.yyokay.project</groupId>
     <artifactId>yyok-oooze</artifactId>
     <packaging>jar</packaging>
-    <name>Maven Quick Start Archetype</name>
+    <name>yyok-project-oooze-web</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

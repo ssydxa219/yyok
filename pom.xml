@@ -14,10 +14,12 @@
     <artifactId>yyok</artifactId>
     <packaging>pom</packaging>
     <version>1.0.1</version>
+    <name>yyok</name>
     <modules>
         <module>yyok-shares</module>
         <module>yyok-bins</module>
         <module>yyok-docs</module>
+        <module>yyok-libs</module>
         <module>yyok-projects</module>
     </modules>
 
