@@ -15,6 +15,9 @@
     <name>yyok-projects</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+    <modules>
+        <module>yyok-oooze</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

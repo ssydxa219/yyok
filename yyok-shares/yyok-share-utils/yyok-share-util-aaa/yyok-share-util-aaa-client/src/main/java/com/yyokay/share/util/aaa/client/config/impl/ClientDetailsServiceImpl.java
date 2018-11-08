@@ -14,10 +14,10 @@ import java.util.Map;
 
 /**
  * @description: 自定义，添加了缓存配置
- * @author: super.wu
- * @date: Created in 2018/5/8 0008
+ * @author: linqinghong
+ * @date: Created in 2018/11/08
  * @modified By:
- * @version: 1.0
+ * @version: 1.0.1
  **/
 @Service
 public class ClientDetailsServiceImpl implements ClientDetailsService {

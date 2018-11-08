@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 /**
- * Created by wangyunfei on 2017/6/12.
- */
+ * @author: linqinghong
+ * ?* @date: Created in 2018/11/08
+ * @modified By:
+ * @version: 1.0.1
+ **/
 @RestController
 public class UserController {
 

@@ -2,10 +2,10 @@ package com.yyokay.share.util.aaa.client.exception;
 
 /**
  * @description: 参数异常
- * @author: super.wu
- * @date: Created in 2018/4/28 0028
+ * @author: linqinghong
+ * ?* @date: Created in 2018/11/08
  * @modified By:
- * @version: 1.0
+ * @version: 1.0.1
  **/
 public class ParamException extends Exception{
 

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 /**
  * @description:
- * @author: super.wu
- * @date: Created in 2018/5/25 0025
+ * @author: linqinghong
+ * ?* @date: Created in 2018/11/08
  * @modified By:
- * @version: 1.0
+ * @version: 1.0.1
  **/
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
