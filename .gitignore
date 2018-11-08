@@ -14,12 +14,12 @@ buildNumber.properties
 *.log
 # About IntelliJ
 *.iml
-/.idea/
-/out/
+/.idea
+/out
 # BlueJ files
 *.ctxt
 # Mobile Tools for Java (J2ME)
-.mtj.tmp/
+.mtj.tmp
 # macOS
 .DS_Store
 # Package Files
@@ -58,3 +58,11 @@ gen/
 # Eclipse project files
 .classpath
 .project
+
+# project files
+*/target
+/.idea
+.mvn
+.settings/
+*/log
+log/

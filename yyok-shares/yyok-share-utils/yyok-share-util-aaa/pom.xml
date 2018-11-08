@@ -3,22 +3,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>yyok-shares</artifactId>
-        <groupId>com.yyokay.share</groupId>
+        <artifactId>yyok-share-utils</artifactId>
+        <groupId>com.yyokay.share.util</groupId>
         <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yyokay.share.util</groupId>
-    <artifactId>yyok-share-utils</artifactId>
+    <groupId>com.yyokay.share.util.aaa</groupId>
+    <artifactId>yyok-share-util-aaa</artifactId>
     <packaging>pom</packaging>
-    <name>yyok-share-utils</name>
-    <!-- FIXME change it to the project's website -->
+
+    <name>yyok-share-util-aaa</name>
     <url>http://www.example.com</url>
+
     <modules>
-        <module>yyok-share-util-spider</module>
-        <module>yyok-share-util-spring</module>
-        <module>yyok-share-util-aaa</module>
+        <module>yyok-share-util-aaa-server</module>
+        <module>yyok-share-util-aaa-client</module>
     </modules>
 
     <properties>
