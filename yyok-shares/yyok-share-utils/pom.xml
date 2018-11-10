@@ -19,6 +19,7 @@
         <module>yyok-share-util-spider</module>
         <module>yyok-share-util-spring</module>
         <module>yyok-share-util-aaa</module>
+        <module>yyok-share-util-sqls</module>
     </modules>
 
     <properties>
