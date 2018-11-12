@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>yyok-projects</artifactId>
-        <groupId>com.yyokay.project</groupId>
+        <artifactId>yyok-share-util-spider</artifactId>
+        <groupId>com.yyokay.share.util.spider</groupId>
         <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.yyokay.project</groupId>
-    <artifactId>yyok-oooze</artifactId>
+    <groupId>com.yyokay.share.util.spider.person</groupId>
+    <artifactId>yyok-share-util-spider-persons</artifactId>
     <packaging>jar</packaging>
-    <name>yyok-project-oooze-web</name>
+    <name>Maven Quick Start Archetype</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

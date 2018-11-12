@@ -11,11 +11,15 @@
 
     <groupId>com.yyokay.share.util.sqls</groupId>
     <artifactId>yyok-share-util-sqls</artifactId>
+    <packaging>pom</packaging>
 
     <name>Maven</name>
     <!-- FIXME change it to the project's website -->
     <url>http://maven.apache.org/</url>
     <inceptionYear>2001</inceptionYear>
+    <modules>
+        <module>yyok-share-util-sql-mysql2hdfs</module>
+    </modules>
 
     <distributionManagement>
         <site>
