@@ -9,7 +9,7 @@
     <groupId>com.yyokay.share.util.spider.person</groupId>
     <artifactId>yyok-share-util-spider-persons</artifactId>
     <packaging>jar</packaging>
-    <name>Maven Quick Start Archetype</name>
+    <name>yyok-share-util-spider-persons</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
