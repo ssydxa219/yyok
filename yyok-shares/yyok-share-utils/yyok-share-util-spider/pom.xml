@@ -17,6 +17,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>yyok-share-util-spider-persons</module>
+        <module>yyok-share-util-spider-webs</module>
     </modules>
     <packaging>pom</packaging>
 
