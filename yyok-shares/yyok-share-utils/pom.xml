@@ -20,6 +20,8 @@
         <module>yyok-share-util-spring</module>
         <module>yyok-share-util-aaa</module>
         <module>yyok-share-util-sqls</module>
+        <module>yyok-share-util-fs</module>
+        <module>yyok-share-util-hadoop</module>
     </modules>
 
     <properties>

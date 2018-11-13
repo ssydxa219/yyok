@@ -1,5 +1,6 @@
 package com.yyokay.share.util.spider.person.com.yyokay.share.util.comm;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.apache.commons.lang.StringUtils;
 
 import java.text.ParseException;
@@ -98,6 +99,8 @@ public class IdcardUtils extends StringUtils {
         cityCodes.put("81", "香港");
         cityCodes.put("82", "澳门");
         cityCodes.put("91", "国外");
+        cityCodes.put("110000", "北京市");
+
         twFirstCode.put("A", 10);
         twFirstCode.put("B", 11);
         twFirstCode.put("C", 12);
@@ -459,6 +462,7 @@ public class IdcardUtils extends StringUtils {
         return sCode;
     }
 
+
     /**
      * 根据身份编号获取年龄
      *
@@ -644,5 +648,16 @@ public class IdcardUtils extends StringUtils {
         //Pattern pattern = Pattern.compile(str);
         return 1;//pattern.matcher(id).matches() ? 0 : 1;
     }
+
+    public static Map<String, Integer> getTwFirstCode() {
+        return twFirstCode;
+    }
+
+    public static Map<String, Integer> getHkFirstCode() {
+        return hkFirstCode;
+    }
+  public static void main(String[] args)throws Exception {
+        getProvinceByIdCard("513232198209201901");
+  }
 
 }

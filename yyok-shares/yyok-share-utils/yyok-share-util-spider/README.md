@@ -13,7 +13,7 @@ yyok-share-util-spider(开源项目）
 	
 	consul 服务注册（发现）中心，consul单独开consul分支，默认eureka
 	
-	springcloud config/Apollo 配置中心，apollo会开单独分支，目前未做
+IdcardUtilspringcloud config/Apollo 配置中心，apollo会开单独分支，目前未做
 	
 	ribbon rest请求客户端负载平衡器，springboot自带
 	
