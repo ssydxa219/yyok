@@ -1,4 +1,4 @@
-![alt text](http://www.yyok.com "yyokay Logo")
+![alt text](http://www.yyokay.com "yyokay Logo")
 
 大数据开发项目（yyokay）
 ================
@@ -38,13 +38,13 @@
    * IntelliJ IDEA [IntelliJ IDEA 2018 注册码](http://idea.lanyus.com/)
    * Download [Eclipse Technology](http://www.eclipse.org/downloads/)
    * Download [Apache Maven 3.6.0](http://mirrors.hust.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz) 
-   * Open the Haddop [webhdfs](http://www.yyok.com/dfshealth.html)，plz copy (http://www.yyok.com) .
-   * Open the Hbase [webUi](http://www.yyok.com/dfshealth.html)，plz copy (http://www.yyok.com) .
-   * Open the Hive [webUi](http://www.yyok.com/dfshealth.html)，plz copy (http://www.yyok.com) .   
-   * Open the Azkaban [webUi](http://www.yyok.com/dfshealth.html)，plz copy (http://www.yyok.com) .   
-   * Open the ketter [ketter.tar](http://www.yyok.com/dfshealth.html)，plz copy (http://www.yyok.com) .   
+   * Open the Haddop [webhdfs](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .
+   * Open the Hbase [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .
+   * Open the Hive [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
+   * Open the Azkaban [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
+   * Open the ketter [ketter.tar](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
    
-开发环境:
+开发环境:(centos 6 7 okay)
 
 ----------------
    * /etc/profile.
