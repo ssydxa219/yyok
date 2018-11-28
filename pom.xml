@@ -20,6 +20,7 @@
         <module>yyok-docs</module>
         <module>yyok-libs</module>
         <module>yyok-projects</module>
+        <module>yyok-etcs</module>
     </modules>
 
 
