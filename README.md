@@ -1,23 +1,65 @@
-![alt text](https://raw.githubusercontent.com/cloudera/hue/master/docs/images/hue_logo.png "Hue Logo")
+![alt text](http://www.yyokay.com "yyokay Logo")
 
+大数据开发项目（yyokay）
+================
 
-Query. Explore. Repeat.
------------------------
+目录
+-----------
 
-Hue is an open source Analytic Workbench for browsing, querying and visualizing data with focus on SQL and Search: [gethue.com](http://gethue.com)
+项目源码: [gitlab.com https://github.com/ssydxa219/yyok.git](https://github.com/ssydxa219/yyok.git)（yyokay）
+----------------
+开发说明:
+----------------
+   * [一、命名风格] 文件名须反映出其实现了什么类 – 包括大小写.(简洁)
+   * [二、名称定义] 驼峰格式分割单词：类名（以及类别、协议名）应首字母大写;方法;变量名应该以小写字母开头;常量大写;包小写。
+   * [三、代码格式] code style formatter.
+   * [四、OOP规约] 当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起;加强对静态类的管理
+   * [五、集合处理].
+   * [六、并发处理].       
+   * [七、注释规约].
+   * [七、注释规约].
+   * [九、README.md] 一定要写，先写业务逻辑，再开发.
+   
+开发架构（yyokay）:
+----------------
+   * yyok-bins－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－shell or !
+   * yyok-docs－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－项目文档
+   * yyok-etcs－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－配置
+   * yyok-libs－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－业务模块
+   * yyok-projects－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－项目组装
+   * yyok-shares－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－底层依赖
+   * yyok-share-utils－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－底层依赖util包
+   
+开发工具:
+----------------
+   * JDK1.8 click the link ＆ down the [jdk-8u192-linux-x64.rpm](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) file and install（rpm -ivh jdk-8u192-linux-x64.rpm） default dir /usr/java/.
+   * IntelliJ IDEA IDEA 2018 tar down [IntelliJ IDEA IDEA 2018 for linux](https://www.jetbrains.com/idea/download/download-thanks.html?platform=linux).
+   * IntelliJ IDEA IDEA 2018 exe down [IntelliJ IDEA IDEA 2018 for windows](https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows).
+   * IntelliJ IDEA [IntelliJ IDEA 2018 注册码](http://idea.lanyus.com/)
+   * Download [Eclipse Technology](http://www.eclipse.org/downloads/)
+   * Download [Apache Maven 3.6.0](http://mirrors.hust.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz) 
+   * Open the Haddop [webhdfs](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .
+   * Open the Hbase [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .
+   * Open the Hive [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
+   * Open the Azkaban [webUi](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
+   * Open the ketter [ketter.tar](http://www.yyokay.com/dfshealth.html)，plz copy (http://www.yyokay.com) .   
+   
+开发环境:(centos 6 7 okay)
 
-It features:
-
-   * [Editors](http://gethue.com/sql-editor/) to query with SQL and submit jobs.
-   * [Dashboards](http://gethue.com/search-dashboards/) to dynamically interact and visualize data.
-   * [Scheduler](http://gethue.com/scheduling/) of jobs and workflows.
-   * [Browsers](http://gethue.com/browsers/) for data and a Data Catalog.
-
-
-![alt text](https://raw.githubusercontent.com/cloudera/hue/master/docs/images/sql-editor.png "Hue Editor")
-
-![alt text](https://raw.githubusercontent.com/cloudera/hue/master/docs/images/dashboard.png "Hue Dashboard")
-
+----------------
+   * /etc/profile.
+   * /etc/hosts.
+   * /etc/selinux/config
+   * /etc/resolv.conf.
+   * yum -y install ntp
+   * ntpdate cn.pool.ntp.org
+   * echo "ulimit -SHn 102400" >> /etc/rc.local
+   * /etc/security/limits.conf
+   * systemctl disable firewalld.service 
+   * systemctl stop firewalld.service
+   * /etc/sysctl.conf
+   * /sbin/sysctl -p
+   * /root/.vimrc
 
 Who is using Hue
 ----------------
@@ -93,3 +135,6 @@ YYOKAY 学习教程
 	项目启动顺序：
 	
 	eureka/consul -> config -> 剩下其他的服务``
+	
+	能看到nginx欢迎界面说明,nginx安装成功
+

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+    <!--指定hdfs的nameservice为bdcluster，需要和core-site.xml中的保持一致 -->
+
+    <property>
+        <name>dfs.nameservices</name>
+        <value>bdcluster</value>
+    </property>
+    <!-- bdcluster下面有两个NameNode，分别是nn1，nn2 -->
+    <property>
+        <name>dfs.ha.namenodes.bdcluster</name>
+        <value>nn1,nn2</value>
+    </property>
+
+    <!-- nn1的RPC通信地址 -->
+
+    <property>
+        <name>dfs.namenode.rpc-address.bdcluster.nn1</name>
+        <value>c7001:9000</value>
+    </property>
+    <!-- nn2的RPC通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc-address.bdcluster.nn2</name>
+        <value>c7002:9000</value>
+    </property>
+    <!-- nn1的http通信地址 -->
+    <property>
+        <name>dfs.namenode.http-address.bdcluster.nn1</name>
+        <value>c7001:50070</value>
+    </property>
+    <!-- nn2的http通信地址 -->
+    <property>
+        <name>dfs.namenode.http-address.bdcluster.nn2</name>
+        <value>c7002:50070</value>
+    </property>
+    <!-- 指定NameNode的元数据在JournalNode上的存放位置 -->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://c7003:8485;c7004:8485;c7005:8485/bdcluster</value>
+    </property>
+
+    <!-- 指定JournalNode在本地磁盘存放数据的位置 -->
+
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/opt/hadoop-2.8.0/tmp/journal</value>
+    </property>
+
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- 配置失败自动切换实现方式 -->
+    <property>
+        <name>dfs.client.failover.proxy.provider.bdcluster</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider
+        </value>
+    </property>
+    <!-- 配置隔离机制，多个机制用换行分割，即每个机制暂用一行 -->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>
+            sshfence
+            shell(/bin/true)
+        </value>
+    </property>
+    <!-- 使用sshfence隔离机制时需要ssh免密码登陆 -->
+    <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/home/vagrant/.ssh/id_rsa</value>
+    </property>
+    <!-- 配置sshfence隔离机制超时时间 -->
+    <property>
+        <name>dfs.ha.fencing.ssh.connect-timeout</name>
+        <value>30000</value>
+    </property>
+    <!--指定namenode名称空间的存储地址 -->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///opt/hadoop-2.8.0/hdfs/name</value>
+    </property>
+    <!--指定datanode数据存储地址 -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///opt/hadoop-2.8.0/hdfs/data</value>
+    </property>
+    <!--指定数据冗余份数 -->
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+</configuration>
+
+        mapred-site.xml
+
+        <?xml version="1.0"?>
+
+        <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<property>
+
+    <name>mapreduce.framework.name</name>
+
+    <value>yarn</value>
+
+</property>
+
+<!-- 配置 MapReduce JobHistory Server 地址 ，默认端口10020 -->
+
+<property>
+
+    <name>mapreduce.jobhistory.address</name>
+
+    <value>0.0.0.0:10020</value>
+
+</property>
+
+<!-- 配置 MapReduce JobHistory Server web ui 地址， 默认端口19888 -->
+
+<property>
+
+    <name>mapreduce.jobhistory.webapp.address</name>
+
+    <value>0.0.0.0:19888</value>
+
+</property>
+
+</configuration>
+
+
+
+
+
+        yarn-site.xml
+
+        <?xml version="1.0"?>
+
+<configuration>
+
+<!--开启resourcemanagerHA,默认为false -->
+
+<property>
+
+    <name>yarn.resourcemanager.ha.enabled</name>
+
+    <value>true</value>
+
+</property>
+
+<!--开启自动恢复功能 -->
+
+<property>
+
+    <name>yarn.resourcemanager.recovery.enabled</name>
+
+    <value>true</value>
+
+</property>
+
+<!-- 指定RM的cluster id -->
+
+<property>
+
+    <name>yarn.resourcemanager.cluster-id</name>
+
+    <value>yrc</value>
+
+</property>
+
+<!--配置resourcemanager -->
+
+<property>
+
+    <name>yarn.resourcemanager.ha.rm-ids</name>
+
+    <value>rm1,rm2</value>
+
+</property>
+
+<!-- 分别指定RM的地址 -->
+
+<property>
+
+    <name>yarn.resourcemanager.hostname.rm1</name>
+
+    <value>c7001</value>
+
+</property>
+
+<property>
+
+    <name>yarn.resourcemanager.hostname.rm2</name>
+
+    <value>c7002</value>
+
+</property>
+
+<!-- <property> <name>yarn.resourcemanager.ha.id</name> <value>rm1</value>
+
+ <description>If we want to launch more than one RM in single node,we need
+
+ this configuration</description> </property> -->
+
+<!-- 指定zk集群地址 -->
+
+<property>
+
+    <name>ha.zookeeper.quorum</name>
+
+    <value>c7003:2181,c7004:2181,c7005:2181</value>
+
+</property>
+
+!--配置与zookeeper的连接地址-->
+
+<property>
+
+    <name>yarn.resourcemanager.zk-state-store.address</name>
+
+    <value>c7003:2181,c7004:2181,c7005:2181</value>
+
+</property>
+
+<property>
+
+    <name>yarn.resourcemanager.store.class</name>
+
+    <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore
+
+    </value>
+
+</property>
+
+<property>
+
+    <name>yarn.resourcemanager.zk-address</name>
+
+    <value>c7003:2181,c7004:2181,c7005:2181</value>
+
+</property>
+
+<property>
+
+    <name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
+
+    <value>/yarn-leader-election</value>
+
+    <description>Optionalsetting.Thedefaultvalueis/yarn-leader-election
+
+    </description>
+
+</property>
+
+<property>
+
+    <name>yarn.nodemanager.aux-services</name>
+
+    <value>mapreduce_shuffle</value>
+
+</property>
+
+</configuration>
+
+        hadoop-env.sh & mapred-env.sh & yarn-env.sh
+
+        export JAVA_HOME=/opt/jdk1.8.0_121
+        export CLASS_PATH=$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+        export HADOOP_HOME=/opt/hadoop-2.8.0
+        export HADOOP_PID_DIR=/opt/hadoop-2.8.0/pids
+        export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+        export HADOOP_OPTS="$HADOOP_OPTS-Djava.library.path=$HADOOP_HOME/lib/native"
+        export HADOOP_PREFIX=$HADOOP_HOME
+        export HADOOP_MAPRED_HOME=$HADOOP_HOME
+        export HADOOP_COMMON_HOME=$HADOOP_HOME
+        export HADOOP_HDFS_HOME=$HADOOP_HOME
+        export YARN_HOME=$HADOOP_HOME
+        export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+        export HDFS_CONF_DIR=$HADOOP_HOME/etc/hadoop
+        export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+        export JAVA_LIBRARY_PATH=$HADOOP_HOME/lib/native
+        export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+        slaves
+
+        c7001
+        c7002
+        c7003
+        c7004
+        c7005
+
+
+scp
+
+        7、启动Hadoop集群
+
+        1）、启动zookeeper集群
+        分别在c7003、c7004、c7005上执行如下命令启动zookeeper集群；
+        [vagrant@c7003 bin]$ sh zkServer.sh start
+        验证集群zookeeper集群是否启动，分别在c7003、c7004、c7005上执行如下命令验证zookeeper集群是否启动，集群启动成功，有两个follower节点跟一个leader节点；
+        [vagrant@c7003 bin]$ sh zkServer.sh status
+        JMX enabled by default
+        Using config: /opt/zookeeper-3.4.10/bin/../conf/zoo.cfg
+        Mode: follower
+        2）、 启动journalnode集群
+        在c7001上执行如下命令完成JournalNode集群的启动
+        [vagrant@c7001 hadoop-2.8.0]$ sbin/hadoop-daemons.sh start journalnode
+        执行jps命令，可以查看到JournalNode的java进程pid
+        3）、格式化zkfc,让在zookeeper中生成ha节点
+        在c7001上执行如下命令，完成格式化
+        hdfs zkfc -formatZK
+        格式成功后，查看zookeeper中可以看到
+        [zk: localhost:2181(CONNECTED) 1] ls /hadoop-ha
+        [bdcluster]
+        4）、 格式化hdfs
+        hadoop namenode -format
+        5）、 启动NameNode
+        首先在c7001上启动active节点，在c7001上执行如下命令
+        [vagrant@c7001 hadoop-2.8.0]$ sbin/hadoop-daemon.sh start namenode
+        在c7002上同步namenode的数据，同时启动standby的namenod,命令如下
+        #把NameNode的数据同步到c7002上
+        [vagrant@c7002 hadoop-2.8.0]$ bin/hdfs namenode -bootstrapStandby
+        #启动c7002上的namenode作为standby
+        [vagrant@c7002 hadoop-2.8.0]$ sbin/hadoop-daemon.sh start namenode
+        6）、 启动启动datanode
+        在c7001上执行如下命令
+        [vagrant@c7001 hadoop-2.8.0]$ sbin/hadoop-daemons.sh start datanode
+        7）、 启动yarn
+        在作为资源管理器上的机器上启动，我这里是c7001,执行如下命令完成year的启动
+        [vagrant@c7001 hadoop-2.8.0]$ sbin/start-yarn.sh
+
+        8）、 启动ZKFC
+        在c7001上执行如下命令，完成ZKFC的启动
+        [vagrant@c7001 hadoop-2.8.0]$ sbin/hadoop-daemons.sh start zkfc
+        全部启动完后分别在c7001、c7002、c7003、c7004、c7005上执行jps是可以看到下面这些进程的
+        #c7001上的java PID进程
+
+
+
+
+
+        上述验证也可以使用命令hdfs haadmin进行查看NameNode的状态
+        查看namenode工作状态
+        hdfs haadmin -getServiceState nn1
+        将standby状态namenode切换到active
+        hdfs haadmin –transitionToActive nn1
+        将active状态namenode切换到standby
+        hdfs haadmin –transitionToStandby nn2
+
+        9、ResourceManager HA
+
+        NameNode HA操作完之后我们可以发现只有一个节点（这里是c7001）启动，需要手动启动另外一个节点（c7002）的resourcemanager。
+        sbin/yarn-daemon.sh start resourcemanager
+        然后用以下指令查看resourcemanager状态
+        yarn rmadmin -getServiceState rm1
+        结果显示Active
+
+        yarn rmadmin -getServiceState rm2
+        而rm2是standby。
+        验证HA和NameNode HA同理，kill掉Active resourcemanager，则standby的resourcemanager则会转换为Active。
+        还有一条指令可以强制转换
+        yarn rmadmin –transitionToStandby rm1
+
+        注意：yarn-site.xml的
+
+<property>
+　　　　<name>yarn.resourcemanager.ha.id</name>
+　　　　<value>rm1</value>
+　　　　<description>If we want to launch more than one RM in single node,we need this configuration</description>
+　</property>
+
+        在c7001上配置是rm1,而在c7002上一定要配置rm2,如果不修改，c7002的resourcemanager启动不了。
