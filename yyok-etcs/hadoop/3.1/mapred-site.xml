@@ -50,4 +50,18 @@
 		</value>
 	</property>
 
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>/ddhome/bin/hadoop</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>/ddhome/bin/hadoop</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>/ddhome/bin/hadoop</value>
+</property>
+
+
 </configuration>
