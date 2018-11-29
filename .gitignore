@@ -1,5 +1,12 @@
 # Built application files and Maven
 target/
+_linux/
+codestyles/
+debugger.xml
+markdown.xml
+projectView.xml
+find.xml
+vcs.xml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
