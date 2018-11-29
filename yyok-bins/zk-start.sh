@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 hosts=('dda' 'ddb' 'ddc' 'dde' 'ddf')
 bh=/ddhome/bin/zookeeper
 zkServer=$bh/bin/zkServer.sh

@@ -17,10 +17,10 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-<property>
-	<name>fs.defaultFS</name>
-	<value>hdfs://jianbing</value>
-</property>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://jianbing</value>
+	</property>
 	<property>
 		<name>io.file.buffer.size</name>
 		<value>131072</value>
@@ -45,18 +45,25 @@
 		<name>hadoop.proxyuser.root.groups</name>
 		<value>*</value>
 	</property>
-</configuration>
 
-<!-- hadoop链接zookeeper的超时时长设置 -->
-<property>
-	<name>ha.zookeeper.session-timeout.ms</name>
-	<value>30000</value>
-	<description>ms</description>
-</property>
+	<property>
+		<name>ha.zookeeper.session-timeout.ms</name>
+		<value>30000</value>
+		<description>ms</description>
+	</property>
 
-<property>
-	<name>fs.trash.interval</name>
-	<value>1440</value>
-</property>
+	<property>
+		<name>fs.trash.interval</name>
+		<value>4320</value>
+	</property>
 
+	<property>
+		<name>fs.trash.checkpoint.interval</name>
+		<value>60</value>
+	</property>
+
+	<property>
+		<name>dfs.ha.fencing.methods</name>
+		<value>null</value>
+	</property>
 </configuration>

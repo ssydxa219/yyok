@@ -17,51 +17,59 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<!-- 指定mr框架为yarn方式 -->
-	<property>
-		<name>mapreduce.framework.name</name>
-		<value>yarn</value>
-	</property>
+    <!-- 指定mr框架为yarn方式 -->
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
 
-	<!-- 指定mapreduce jobhistory地址 -->
-	<property>
-		<name>mapreduce.jobhistory.address</name>
-		<value>nn01:10020</value>
-	</property>
+    <!-- 指定mapreduce jobhistory地址 -->
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>ddb:10020</value>
+    </property>
 
-	<!-- 任务历史服务器的web地址 -->
-	<property>
-		<name>mapreduce.jobhistory.webapp.address</name>
-		<value>nn01:19888</value>
-	</property>
+    <!-- 任务历史服务器的web地址 -->
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>ddb:19888</value>
+    </property>
 
-	<property>
-		<name>mapreduce.application.classpath</name>
-		<value>
-			/ddhome/bin/hadoop/etc/hadoop,
-			/ddhome/bin/hadoop/share/hadoop/common/*,
-			/ddhome/bin/hadoop/share/hadoop/common/lib/*,
-			/ddhome/bin/hadoop/share/hadoop/hdfs/*,
-			/ddhome/bin/hadoop/share/hadoop/hdfs/lib/*,
-			/ddhome/bin/hadoop/share/hadoop/mapreduce/*,
-			/ddhome/bin/hadoop/share/hadoop/mapreduce/lib/*,
-			/ddhome/bin/hadoop/share/hadoop/yarn/*,
-			/ddhome/bin/hadoop/share/hadoop/yarn/lib/*
-		</value>
-	</property>
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>
+            /ddhome/bin/hadoop/etc/hadoop,
+            /ddhome/bin/hadoop/share/hadoop/common/*,
+            /ddhome/bin/hadoop/share/hadoop/common/lib/*,
+            /ddhome/bin/hadoop/share/hadoop/hdfs/*,
+            /ddhome/bin/hadoop/share/hadoop/hdfs/lib/*,
+            /ddhome/bin/hadoop/share/hadoop/mapreduce/*,
+            /ddhome/bin/hadoop/share/hadoop/mapreduce/lib/*,
+            /ddhome/bin/hadoop/share/hadoop/yarn/*,
+            /ddhome/bin/hadoop/share/hadoop/yarn/lib/*
+        </value>
+    </property>
 
-<property>
-  <name>yarn.app.mapreduce.am.env</name>
-  <value>/ddhome/bin/hadoop</value>
-</property>
-<property>
-  <name>mapreduce.map.env</name>
-  <value>/ddhome/bin/hadoop</value>
-</property>
-<property>
-  <name>mapreduce.reduce.env</name>
-  <value>/ddhome/bin/hadoop</value>
-</property>
+    <property>
+        <name>yarn.app.mapreduce.am.env</name>
+        <value>/ddhome/bin/hadoop</value>
+    </property>
+    <property>
+        <name>mapreduce.map.env</name>
+        <value>/ddhome/bin/hadoop</value>
+    </property>
+    <property>
+        <name>mapreduce.reduce.env</name>
+        <value>/ddhome/bin/hadoop</value>
+    </property>
 
+    <!--mapreduce.map.memory.mb
+
+    mapreduce.reduce.memory.mb
+    mapreduce.map.java.opts
+
+    mapreduce.reduce.java.opts
+
+    -->
 
 </configuration>
