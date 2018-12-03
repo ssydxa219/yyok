@@ -259,7 +259,7 @@ echo "-------down ----------"
 #rpm -ivh install/jdk-8u192-linux-x64.rpm
 
 cat >> /etc/profile << EOF
-export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
+export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
 export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
 export PATH=$PATH:${JAVA_HOME}/bin
 export SCALA_HOME=/ddhome/bin/scala
