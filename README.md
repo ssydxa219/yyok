@@ -64,10 +64,25 @@
    * /sbin/sysctl -p
    * /root/.vimrc
 
-Who is using Hue
+Using dev evn
 ----------------
-Thousands of companies and organizations use Hue to open-up and query their data in order to make smarter decisions. Just at Cloudera, Hue is heavily used by hundreds of customers executing millions of queries daily. Hue directly ships in Cloudera, Amazon, MapR, BigTop and is compatible with the other distributions.
 
+   * YARN ENV [YARN CLUSTER](http://101.37.14.199:8188): http://101.37.14.199:8188 
+   
+   * WEBHDFS ENV [HDFS CLUSTER](http://xuanwu.51gjj.com:50070): http://xuanwu.51gjj.com:50070
+
+   * WEBHDFS ENV [WEBHDFS CLUSTER](http://101.37.14.63:50070): http://101.37.14.63:50070
+
+   * HBASE ENV [Backup Masters](http://101.37.14.199:60010): http://101.37.14.199:60010
+
+   * HBASE ENV [RegionServer](http://118.31.173.146:16030): http://118.31.173.146:16030
+
+   * HBASE ENV [Master](http://101.37.14.63:60010): http://101.37.14.63:60010
+
+   * SPARK ENV [SPARK-MASTER](http://101.37.14.63:8088): http://101.37.14.63:8088
+
+   * SPARK ENV [SPARK-SHELL](http://101.37.14.199:8081): http://101.37.14.199:8081
+   
 
 Getting Started
 ---------------
