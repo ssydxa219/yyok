@@ -16,8 +16,9 @@ cd /ddhome/src/spark-2.4.0/dev
 
 
 spark-shell --master spark://101.37.14.199:7077 --executor-memory 500m
-spark-shell --master spark://101.37.14.199:7077 --executor-memory 512m --driver-memory 500m
+spark-shell --master spark://101.37.14.199:7077 --executor-memory 512m --driver-memory 512m
 
-http://101.37.14.199:8080
+http://101.37.14.63:8088/
+http://101.37.14.199:8081/
 
 
