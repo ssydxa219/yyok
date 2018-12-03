@@ -40,7 +40,7 @@
    * Download [Apache Maven 3.6.0](http://mirrors.hust.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz) 
    * Open the Haddop [WebHDFS](http://www.yyokay:50070/dfshealth.html)，plz copy (http://www.yyokay:50070) .
    * Open the YARN [MapReduce](http://www.yyokay.com:8188)，plz copy (http://www.yyokay.com:8088) .
-   * Open the Hbase [Hbase Master](http://www.yyokay.com:60010) & [Hbase RegionServer](http://www.yyokay.com:16030)，plz copy (http://www.yyokay.com:60010,http://www.yyokay.com:16030) .
+   * Open the Hbase [Hbase Master](http://www.yyokay.com:60010) & [Hbase RegionServer](http://www.yyokay.com:16030)，plz copy (http://www.yyokay.com:60010,16030) .
    * Open the Spark [Spark Wen-UI](http://www.yyokay:8080)，plz copy (um:superuser;pwd:mgNTS0EMshqhcQBa) .  
 	* Open the Hive [webUi](http://www.yyokay:9903)，plz copy (http://www.yyokay:9903) .   
    * Open the Hue [Hue Wen-UI](http://www.yyokay:9901)，plz copy (um:superuser;pwd:mgNTS0EMshqhcQBa) .  
