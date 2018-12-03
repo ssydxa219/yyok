@@ -1,0 +1,3 @@
+export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
+export HBASE_LOG_DIR=/data/local/hbase/log
+export HBASE_CONF_DIR=/ddhome/bin/hbase/conf

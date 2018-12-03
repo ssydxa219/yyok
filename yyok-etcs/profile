@@ -14,7 +14,15 @@ export HADOOP_COMMON_HOME=$HADOOP_HOME
 export HADOOP_HDFS_HOME=$HADOOP_HOME
 export YARN_HOME=$HADOOP_HOME
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export JAVA_LIBRARY_PATH=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 export HADOOP_INSTALL=$HADOOP_HOME
 export HBASE_HOME=/ddhome/bin/hbase
 export PATH=$PATH:${HBASE_HOME}/bin
+export HIVE_HOME=/ddhome/bin/hive
+export PATH=$PATH:$HIVE_HOME/bin
+export SPARK_HOME=/ddhome/bin/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+export MYSQL_HOME=/ddhome/bin/mysql
+export PATH=$PATH:$MYSQL_HOME/bin
+
