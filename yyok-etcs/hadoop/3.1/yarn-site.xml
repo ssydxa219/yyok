@@ -195,7 +195,7 @@
 
     <property>
         <name>mapreduce.reduce.memory.mb</name>
-        <value>8192</value>
+        <value>4098</value>
     </property>
 
     <property>

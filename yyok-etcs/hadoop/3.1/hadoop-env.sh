@@ -5,3 +5,4 @@ export HADOOP_HOME=/ddhome/bin/hadoop
 export HADOOP_LOG_DIR=/data/local/hadoop/log
 export HADOOP_PID_DIR=/ddhome/bin/hadoop/tmp
 export HADOOP_CONF_DIR=/ddhome/bin/hadoop/etc/hadoop
+export HADOOP_OPTS="-Djava.library.path=/ddhome/bin/hadoop/lib/native"

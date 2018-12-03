@@ -1,0 +1,15 @@
+export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64/
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+
+export SCALA_HOME=/ddhome/bin/scala
+export PATH=$SCALA_HOME/bin:$PATH
+export NODE_HOME=/ddhome/bin/node
+export PATH=$NODE_HOME/bin:$PATH
+export MYSQL_HOME=/ddhome/bin/mysql
+export PATH=$MYSQL_HOME/bin:$PATH
+export PATH=/ddhome/bin/maven/bin:$PATH
+export JMETER_HOME=/ddhome/bin/node
+export PATH=$JMETER_HOME/bin:$PATH

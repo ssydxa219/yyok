@@ -1,0 +1,38 @@
+<property>
+	<name>hbase.rootdir</name>
+	<value>hdfs://jianbing/data/hbase/</value>
+</property>
+<property>
+	<name>hbase.cluster.distributed</name>
+	<value>true</value>
+</property>
+<property>
+	<name>hbase.zookeeper.quorum</name>
+	<value>dda,ddb,ddc,dde,ddf</value>
+</property>
+<property>
+	<name>hbase.tmp.dir</name>
+	<value>/ddhome/bin/hbase/tmp</value>
+</property>
+
+<property>
+	<name>hbase.zookeeper.property.dataDir</name>
+	<value>/data/local/zookeeper/data</value>
+</property>
+<property>
+	<name>hbase.master.info.port</name>
+	<value>60010</value>
+</property>
+<property>
+	<name>hbase.master</name>
+	<value>60000</value>
+</property>
+<property>
+	<name>hbase.zookeeper.property.clientPort</name>
+	<value>2181</value>
+</property>
+<property>
+	<name>dfs.replication</name>
+	<value>2</value>
+</property>
+
