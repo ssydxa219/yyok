@@ -1,5 +1,3 @@
-
-
 sbt assembly -Pyarn -Phadoop-3.1.1 -Pspark-ganglia-lgpl -Pkinesis-asl -Phive
 
 
