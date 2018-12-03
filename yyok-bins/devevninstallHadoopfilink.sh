@@ -33,6 +33,7 @@ yum_tools(){
 yum install -y vim wget curl curl-devel bash-completion lsof iotop iostat unzip bzip2 bzip2-devel
 yum install -y gcc gcc-c++ make cmake autoconf openssl-devel openssl-perl net-tools
 yum -y install iotop iftop net-tools lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel  python-devel bash-completion lsof
+yum -y install gcc gcc-c++ kernel-devel gcc-essential gcc-gfortran build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libgnomeui-devel gtk2 gtk2-devel gtk2-devel-docs gnome-devel gnome-devel-docs libavcodec-dev libavformat-dev libswscale-dev epel-release ffmpeg ffmpeg-devel python-devel numpy libdc1394-devel libv4l-devel gstreamer-plugins-base-devel zlib* libffi-devel zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
 source /usr/share/bash-completion/bash_completion
 }
 
@@ -47,13 +48,13 @@ firewalld_config(){
 
 }
 
-
 #system config
 system_config(){
     sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
     timedatectl set-local-rtc 1 && timedatectl set-timezone Asia/Shanghai
     yum -y install chrony && systemctl start chronyd.service && systemctl enable chronyd.service
 }
+
 ulimit_config(){
     echo "ulimit -SHn 102400" >> /etc/rc.local
     chmod +x /etc/rc.d/rc.local
@@ -246,7 +247,7 @@ modfyhostname () {
 }
 
 dev_env_install(){
-mkdir -p /ddhome/{tools,tmp,bin,usr,log}
+mkdir -p /ddhome/{tools,tmp,bin,usr,log,src}
 chmod -R 777 /ddhome
 cd /ddhome/src
 
@@ -261,6 +262,10 @@ export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HO
 export PATH=$PATH:${JAVA_HOME}/bin
 export SCALA_HOME=/ddhome/bin/scala
 export PATH=$PATH:${SCALA_HOME}/bin
+export MAVEN_HOME=/ddhome/bin/maven
+export PATH=$PATH:${MAVEN_HOME}/bin
+export ZOOKEEPER_HOME=/ddhome/bin/zookeeper
+export PATH=$PATH:${ZOOKEEPER_HOME}/bin
 export HADOOP_HOME=/ddhome/bin/hadoop
 export HADOOP_PREFIX=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
@@ -270,6 +275,8 @@ export YARN_HOME=$HADOOP_HOME
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 export HADOOP_INSTALL=$HADOOP_HOME
+export HBASE_HOME=/ddhome/bin/hbase
+export PATH=$PATH:${HBASE_HOME}/bin
 EOF
 source /etc/profile
 
@@ -280,7 +287,7 @@ ls /ddhome/src | while read files;do
 echo "==================$files======================="
 #------------------maven---------------
 	if [[ $files =~ 'maven' ]]; then
-			echo "====================exeits the " ${files#*.tar}  
+			echo "====================exeits the " ${files#*.tar}
 			tar -zxvf $files
 			mv ${files#*.tar} maven
 		elif [[ $files =~ 'zookeeper' ]]; then
@@ -338,7 +345,7 @@ echo "==================$files======================="
 					wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0.tgz
 					tar -zxvf spark-2.4.0.tgz
 			fi
-		fi	
+		fi
 	#----------------down tar -zxvf mv -------------------
 	echo "------------------maven---------------"
 	echo "------------------maven---------------"
@@ -369,19 +376,21 @@ echo "------------------优化完成--------------------"
 main(){
     #修改字符集
     #sed -i 's/LANG="en_US.UTF-8"/LANG="zh_CN.UTF-8"/' /etc/locale.conf
-    hostname_config
-    yum_config
-    yum_tools
-    firewalld_config
-    system_config
-    ulimit_config
-    sysctl_config
-    ssh_config
-    ntp_config
-    zabbix_config
-    update_kernel
-    other_config
+#    hostname_config
+#    yum_config
+#    yum_tools
+#    firewalld_config
+#    system_config
+#    ulimit_config
+#    sysctl_config
+#    ssh_config
+#    ntp_config
+#    zabbix_config
+#    update_kernel
+#    other_config
+#   close_servers
     dev_env_install
-    close_servers
 }
 main
+
+

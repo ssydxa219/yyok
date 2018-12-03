@@ -32,8 +32,11 @@ yum_config(){
 yum_tools(){
 yum install -y vim wget curl curl-devel bash-completion lsof iotop iostat unzip bzip2 bzip2-devel
 yum install -y gcc gcc-c++ make cmake autoconf openssl-devel openssl-perl net-tools
-yum -y install iotop iftop net-tools lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel  python-devel bash-completion lsof
+yum -y install iotop iftop net-tools lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel  python-devel bash-completion lsof httpd-devel automake autoconf libtool ncurses-devel libxslt groff pcre-devel pkgconfig
+yum -y install gcc gcc-c++ kernel-devel gcc-essential gcc-gfortran build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libgnomeui-devel gtk2 gtk2-devel gtk2-devel-docs gnome-devel gnome-devel-docs libavcodec-dev libavformat-dev libswscale-dev epel-release ffmpeg ffmpeg-devel python-devel numpy libdc1394-devel libv4l-devel gstreamer-plugins-base-devel zlib* libffi-devel zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
 source /usr/share/bash-completion/bash_completion
+yum -y groupinstall "Development tools"
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel
 }
 
 #firewalld
@@ -47,13 +50,13 @@ firewalld_config(){
 
 }
 
-
 #system config
 system_config(){
     sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
     timedatectl set-local-rtc 1 && timedatectl set-timezone Asia/Shanghai
     yum -y install chrony && systemctl start chronyd.service && systemctl enable chronyd.service
 }
+
 ulimit_config(){
     echo "ulimit -SHn 102400" >> /etc/rc.local
     chmod +x /etc/rc.d/rc.local
@@ -175,7 +178,8 @@ ntp_config(){
     #!/bin/bash
     ntplog=/tmp/wmbak.log
     ntpdate ntp.wumart.com 2>&1 >>$ntplog
-     clock --systohc
+     clock --systohcyum -y groupinstall "Development tools"
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
 EOF
     chmod 755 /etc/cron.daily/ntp.sh
 }
@@ -246,14 +250,13 @@ modfyhostname () {
 }
 
 dev_env_install(){
-mkdir -p /ddhome/{tools,tmp,bin,usr,log}
+mkdir -p /ddhome/{tools,tmp,bin,usr,log,src}
 chmod -R 777 /ddhome
 cd /ddhome/src
 
 #cd /ddhome/tools/
 echo "-------down ----------"
 #rpm -ivh install/jdk-8u192-linux-x64.rpm
-tart -zxvf install/scala.tar.gz
 
 cat >> /etc/profile << EOF
 export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
@@ -261,6 +264,10 @@ export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HO
 export PATH=$PATH:${JAVA_HOME}/bin
 export SCALA_HOME=/ddhome/bin/scala
 export PATH=$PATH:${SCALA_HOME}/bin
+export MAVEN_HOME=/ddhome/bin/maven
+export PATH=$PATH:${MAVEN_HOME}/bin
+export ZOOKEEPER_HOME=/ddhome/bin/zookeeper
+export PATH=$PATH:${ZOOKEEPER_HOME}/bin
 export HADOOP_HOME=/ddhome/bin/hadoop
 export HADOOP_PREFIX=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
@@ -270,6 +277,8 @@ export YARN_HOME=$HADOOP_HOME
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 export HADOOP_INSTALL=$HADOOP_HOME
+export HBASE_HOME=/ddhome/bin/hbase
+export PATH=$PATH:${HBASE_HOME}/bin
 EOF
 source /etc/profile
 
@@ -280,7 +289,7 @@ ls /ddhome/src | while read files;do
 echo "==================$files======================="
 #------------------maven---------------
 	if [[ $files =~ 'maven' ]]; then
-			echo "====================exeits the " ${files#*.tar}  
+			echo "====================exeits the " ${files#*.tar}
 			tar -zxvf $files
 			mv ${files#*.tar} maven
 		elif [[ $files =~ 'zookeeper' ]]; then
@@ -303,42 +312,71 @@ echo "==================$files======================="
 			then
 			echo "====================exeits the " $files
 			tar -zxvf $files
+		elif [[ $files =~ 'kafka' ]]
+			then
+			echo "====================exeits the " $files
+			tar -zxvf $files
 		else
-			if [[ $files =~ 'maven' || ! -d 'maven' ]]; then
+			if [[ $files =~ 'maven' || ! -x 'maven' ]]; then
 				wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
 				tar -zxvf apache-maven-3.6.0-bin.tar.gz
-				mv apache-maven-3.6.0-bin maven
+				mv apache-maven-3.6.0 /ddhome/src/maven
 			fi
-			if [[ $files =~ 'zookeeper' || ! -d 'zookeeper' ]]; then
+			if [[ $files =~ 'zookeeper' || ! -x 'zookeeper' ]]; then
 				wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz
 				tar -zxvf zookeeper-3.4.13.tar.gz
-				mv
+				mv zookeeper-3.4.13 /ddhome/src/zookeeper
 			fi
-			if [[ $files =~ 'hadoop' || ! -d 'hadoop' ]]; then
+			if [[ $files =~ 'hadoop' || ! -x 'hadoop' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2-src.tar.gz
 					tar -zxvf hadoop-2.9.2-src.tar.gz
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.1.1/hadoop-3.1.1-src.tar.gz
 					tar -zxvf hadoop-3.1.1-src.tar.gz
 			fi
-			if [[ $files =~ 'hbase' || ! -d 'hbase' ]]; then
+			if [[ $files =~ 'hbase' || ! -x 'hbase' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/hbase/2.1.1/hbase-2.1.1-bin.tar.gz
 					tar -zxvf hbase-2.1.1-bin.tar.gz
 					mv hbase-2.1.1-bin hbase
 					wget http://mirrors.shu.edu.cn/apache/hbase/2.1.1/hbase-2.1.1-src.tar.gz
 					tar -zxvf hbase-2.1.1-src.tar.gz
 			fi
-			if [[ $files =~ 'hive' || ! -d 'hive' ]]; then
+			if [[ $files =~ 'hive' || ! -x 'hive' ]]; then
 				wget http://mirrors.shu.edu.cn/apache/hive/stable-2/apache-hive-2.3.4-bin.tar.gz
 				tar -zxvf apache-hive-2.3.4-bin.tar.gz
-				mv apache-hive-2.3.4-bin hive
+				mv apache-hive-2.3.4-bin /ddhome/src/hive
 			fi
-			if [[ $files =~ 'spark' || ! -d 'spark' ]]; then
+			if [[ $files =~ 'spark' || ! -x 'spark' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
 					tar -zxvf spark-2.4.0-bin-hadoop2.7.tgz
 					wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0.tgz
 					tar -zxvf spark-2.4.0.tgz
 			fi
-		fi	
+			if [[ $files =~ 'kafka' || ! -x 'kafka' ]]; then
+					wget http://mirrors.hust.edu.cn/apache/kafka/2.1.0/kafka_2.11-2.1.0.tgz
+					tar -zxvf kafka_2.11-2.1.0.tgz
+                    mv kafka_2.11-2.1.0 /ddhome/src/kafka
+			fi
+			if [[ $files =~ 'flink' || ! -x 'flink' ]]; then
+					wget http://mirror.bit.edu.cn/apache/flink/flink-1.7.0/flink-1.7.0-bin-scala_2.11.tgz
+					wget http://mirror.bit.edu.cn/apache/flink/flink-1.7.0/flink-1.7.0-bin-scala_2.12.tgz
+					wget http://mirrors.hust.edu.cn/apache/flink/flink-1.7.0/flink-1.7.0-src.tgz
+					#tar -zxvf flink-1.7.0-bin-scala_2.11.tgz
+					tar -zxvf flink-1.7.0-bin-scala_2.12.tgz
+                    mv flink-1.7.0-bin-scala_2.11 /ddhome/src/flink
+			fi
+			if [[ $files =~ 'scala' || ! -x 'scala' ]]; then
+					wget https://downloads.lightbend.com/scala/2.12.7/scala-2.12.7.tgz
+					tar -zxvf scala-2.12.7.tgz
+                    mv scala-2.12.7 /ddhome/src/scala
+			fi
+			if [[ $files =~ 'master' || ! -x 'master' ]]; then
+					wget https://github.com/azkaban/azkaban/archive/master.zip
+					tar unzip master.zip
+			fi
+
+
+
+		fi
 	#----------------down tar -zxvf mv -------------------
 	echo "------------------maven---------------"
 	echo "------------------maven---------------"
@@ -369,19 +407,22 @@ echo "------------------优化完成--------------------"
 main(){
     #修改字符集
     #sed -i 's/LANG="en_US.UTF-8"/LANG="zh_CN.UTF-8"/' /etc/locale.conf
-    hostname_config
-    yum_config
-    yum_tools
-    firewalld_config
-    system_config
-    ulimit_config
-    sysctl_config
-    ssh_config
-    ntp_config
-    zabbix_config
-    update_kernel
-    other_config
+#    hostname_config
+#    yum_config
+#    yum_tools
+#    firewalld_config
+#    system_config
+#    ulimit_config
+#    sysctl_config
+#    ssh_config
+#    ntp_config
+#    zabbix_config
+#    update_kernel
+#    other_config
+#   close_servers
     dev_env_install
-    close_servers
 }
+
 main
+
+
