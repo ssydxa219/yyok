@@ -1,3 +1,40 @@
+Table       (HBase table)
+    Region       (Regions for the table)
+         Store          (Store per ColumnFamily for each Region for the table)
+              MemStore        (MemStore for each Store for each Region for the table)
+              StoreFile       (StoreFiles for each Store for each Region for the table)
+                    Block     (Blocks within a StoreFile within a Store for each Region for the table)
+                    
+                    
+create "ods:users","info","relation", {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit', CONFIGURATION => {'hbase.hregion.scan.loadColumnFamiliesOnDemand' => 'true'}}
+
+
+Create a table with namespace=ns1 and table qualifier=t1  
+  hbase> create 'ns1:t1', {NAME => 'f1', VERSIONS => 5}  
+  
+Create a table with namespace=default and table qualifier=t1  
+  hbase> create 't1', {NAME => 'f1'}, {NAME => 'f2'}, {NAME => 'f3'}  
+  hbase> # The above in shorthand would be the following:  
+  hbase> create 't1', 'f1', 'f2', 'f3'  
+  hbase> create 't1', {NAME => 'f1', VERSIONS => 1, TTL => 2592000, BLOCKCACHE => true}  
+  hbase> create 't1', {NAME => 'f1', CONFIGURATION => {'hbase.hstore.blockingStoreFiles' => '10'}}  
+    
+Table configuration options can be put at the end.  
+Examples:  
+  
+  hbase> create 'ns1:t1', 'f1', SPLITS => ['10', '20', '30', '40']  
+  hbase> create 't1', 'f1', SPLITS => ['10', '20', '30', '40']  
+  hbase> create 't1', 'f1', SPLITS_FILE => 'splits.txt', OWNER => 'johndoe'  
+  hbase> create 't1', {NAME => 'f1', VERSIONS => 5}, METADATA => { 'mykey' => 'myvalue' }  
+  hbase> # Optionally pre-split the table into NUMREGIONS, using  
+  hbase> # SPLITALGO ("HexStringSplit", "UniformSplit" or classname)  
+  hbase> create 't1', 'f1', {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit'}  
+  hbase> create 't1', 'f1', {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit', CONFIGURATION => {'hbase.hregion.scan.loadColumnFamiliesOnDemand' => 'true'}}  
+  hbase> create 't1', {NAME => 'f1'}, {NAME => 'if1', LOCAL_INDEX=>'COMBINE_INDEX|INDEXED=f1:q1:8|rowKey:rowKey:10,UPDATE=true'}
+  create 'split_table_test', 'cf', {SPLITS_FILE => 'region_split_info.txt'}
+  create 'split_table_test',{NAME =>'cf', COMPRESSION => 'SNAPPY'}, {SPLITS_FILE => 'region_split_info.txt'} 
+  
+  
 hbase.rootdir
 
 这个目录是region server的共享目录，用来持久化HBase。URL需要是'完全正确'的，还要包含文件系统的scheme。例如，要表示hdfs中的'/hbase'目录，namenode 运行在namenode.example.org的9090端口。则需要设置为hdfs://namenode.example.org:9000/hbase。默认情况下HBase是写到/tmp的。不改这个配置，数据会在重启的时候丢失。

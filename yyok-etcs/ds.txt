@@ -1,0 +1,12 @@
+ODS——操作性数据
+
+DW——数据仓库(data warehouse)
+	DW数据分层，由下到上为 DWD,DWB,DWS
+	DWD：data warehouse detail 细节数据层，有的也称为 ODS层，是业务层与数据仓库的隔离层
+	DWB：data warehouse base 基础数据层，存储的是客观数据，一般用作中间层，可以认为是大量指标的数据层。
+	DWS：data warehouse service 服务数据层，基于DWB上的基础数据，整合汇总成分析某一个主题域的服务数据，一般是宽表。
+DM——数据集市(data mart)
+
+
+
+
