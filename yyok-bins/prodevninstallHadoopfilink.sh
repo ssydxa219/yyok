@@ -331,6 +331,7 @@ echo "==================$files======================="
 				tar -zxvf zookeeper-3.4.13.tar.gz
 				mv zookeeper-3.4.13.tar.gz tars
 				mv zookeeper-3.4.13 /ddhome/src/zookeeper
+				#cp zookeeper/conf/zoo_sample.cfg /ddhome/src/zookeeper/conf/zoo.cfg
 			fi
 			if [[ $files =~ 'hadoop' || ! -x 'hadoop' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2-src.tar.gz
@@ -383,9 +384,9 @@ echo "==================$files======================="
                mv scala-2.12.7 /ddhome/src/scala
                mv scala-2.12.7.tgz tars
 			fi
-			if [[ $files =~ 'master' || ! -x 'master' ]]; then
+			if [[ $files =~ 'master' || ! -x 'master' ]]; then  ##azkaban-master
 					wget https://github.com/azkaban/azkaban/archive/master.zip
-					tar unzip master.zip
+					unzip master.zip
 			fi
 
 
