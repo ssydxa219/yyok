@@ -160,10 +160,13 @@ EOF
 
 #ssh
 ssh_config(){
-    touch /etc/ssh/sshd_config.$run_time_1
-    cat /etc/ssh/sshd_config >> /etc/ssh/sshd_config.$run_time_1
-    sed -i 's%#UseDNS yes%UseDNS no%' /etc/ssh/sshd_config
-    sed -i 's%GSSAPIAuthentication yes%GSSAPIAuthentication no%' /etc/ssh/sshd_config
+    #touch /etc/ssh/sshd_config.$run_time_1
+    #cat /etc/ssh/sshd_config >> /etc/ssh/sshd_config.$run_time_1
+    #sed -i 's%#UseDNS yes%UseDNS no%' /etc/ssh/sshd_config
+    #sed -i 's%GSSAPIAuthentication yes%GSSAPIAuthentication no%' /etc/ssh/sshd_config
+   [ ! -f /root/.ssh/id_rsa.pub ] && ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
+	cat /root/.ssh/id_rsa.pub
+	#ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.101.181
 }
 
 #ntp
@@ -250,7 +253,7 @@ modfyhostname () {
 }
 
 dev_env_install(){
-mkdir -p /ddhome/{tools,tmp,bin,usr,log,src}
+mkdir -p /ddhome/{tools,tmp,bin,usr,log,src,src/tars}
 chmod -R 777 /ddhome
 cd /ddhome/src
 
@@ -321,24 +324,30 @@ echo "==================$files======================="
 				wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
 				tar -zxvf apache-maven-3.6.0-bin.tar.gz
 				mv apache-maven-3.6.0 /ddhome/src/maven
+				mv apache-maven-3.6.0-bin.tar.gz tars
 			fi
 			if [[ $files =~ 'zookeeper' || ! -x 'zookeeper' ]]; then
 				wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz
 				tar -zxvf zookeeper-3.4.13.tar.gz
+				mv zookeeper-3.4.13.tar.gz tars
 				mv zookeeper-3.4.13 /ddhome/src/zookeeper
 			fi
 			if [[ $files =~ 'hadoop' || ! -x 'hadoop' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2-src.tar.gz
 					tar -zxvf hadoop-2.9.2-src.tar.gz
+					mv hadoop-2.9.2-src.tar.gz tars
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.1.1/hadoop-3.1.1-src.tar.gz
 					tar -zxvf hadoop-3.1.1-src.tar.gz
+					mv hadoop-3.1.1-src.tar.gz tars
 			fi
 			if [[ $files =~ 'hbase' || ! -x 'hbase' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/hbase/2.1.1/hbase-2.1.1-bin.tar.gz
 					tar -zxvf hbase-2.1.1-bin.tar.gz
-					mv hbase-2.1.1-bin hbase
+					mv hbase-2.1.1-bin.tar.gz tars
+					mv hbase-2.1.1-bin hbase tars
 					wget http://mirrors.shu.edu.cn/apache/hbase/2.1.1/hbase-2.1.1-src.tar.gz
 					tar -zxvf hbase-2.1.1-src.tar.gz
+					mv hbase-2.1.1-src.tar.gz tars
 			fi
 			if [[ $files =~ 'hive' || ! -x 'hive' ]]; then
 				wget http://mirrors.shu.edu.cn/apache/hive/stable-2/apache-hive-2.3.4-bin.tar.gz
@@ -348,13 +357,16 @@ echo "==================$files======================="
 			if [[ $files =~ 'spark' || ! -x 'spark' ]]; then
 					wget http://mirrors.shu.edu.cn/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
 					tar -zxvf spark-2.4.0-bin-hadoop2.7.tgz
+					mv spark-2.4.0-bin-hadoop2.7.tgz tars
 					wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0.tgz
 					tar -zxvf spark-2.4.0.tgz
+					mv spark-2.4.0.tgz tars
 			fi
 			if [[ $files =~ 'kafka' || ! -x 'kafka' ]]; then
 					wget http://mirrors.hust.edu.cn/apache/kafka/2.1.0/kafka_2.11-2.1.0.tgz
 					tar -zxvf kafka_2.11-2.1.0.tgz
-                    mv kafka_2.11-2.1.0 /ddhome/src/kafka
+               mv kafka_2.11-2.1.0 /ddhome/src/kafka
+              	mv kafka_2.11-2.1.0.tgz tars
 			fi
 			if [[ $files =~ 'flink' || ! -x 'flink' ]]; then
 					wget http://mirror.bit.edu.cn/apache/flink/flink-1.7.0/flink-1.7.0-bin-scala_2.11.tgz
@@ -362,12 +374,14 @@ echo "==================$files======================="
 					wget http://mirrors.hust.edu.cn/apache/flink/flink-1.7.0/flink-1.7.0-src.tgz
 					#tar -zxvf flink-1.7.0-bin-scala_2.11.tgz
 					tar -zxvf flink-1.7.0-bin-scala_2.12.tgz
-                    mv flink-1.7.0-bin-scala_2.11 /ddhome/src/flink
+               mv flink-1.7.0-bin-scala_2.12 /ddhome/src/flink
+               mv  flink-1.7.0-bin-scala_2.11.tgz flink-1.7.0-bin-scala_2.12.tgz flink-1.7.0-src.tgz tars
 			fi
 			if [[ $files =~ 'scala' || ! -x 'scala' ]]; then
 					wget https://downloads.lightbend.com/scala/2.12.7/scala-2.12.7.tgz
 					tar -zxvf scala-2.12.7.tgz
-                    mv scala-2.12.7 /ddhome/src/scala
+               mv scala-2.12.7 /ddhome/src/scala
+               mv scala-2.12.7.tgz tars
 			fi
 			if [[ $files =~ 'master' || ! -x 'master' ]]; then
 					wget https://github.com/azkaban/azkaban/archive/master.zip
@@ -414,7 +428,7 @@ main(){
 #    system_config
 #    ulimit_config
 #    sysctl_config
-#    ssh_config
+    ssh_config
 #    ntp_config
 #    zabbix_config
 #    update_kernel
