@@ -387,6 +387,7 @@ echo "==================$files======================="
 			if [[ $files =~ 'master' || ! -x 'master' ]]; then  ##azkaban-master
 					wget https://github.com/azkaban/azkaban/archive/master.zip
 					unzip master.zip
+					mv master.zip tars
 			fi
 
 
