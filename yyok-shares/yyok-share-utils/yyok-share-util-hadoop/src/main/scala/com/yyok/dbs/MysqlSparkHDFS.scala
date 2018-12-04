@@ -49,7 +49,6 @@ object MysqlSparkHDFS {
   }
   
   def main(args: Array[String]): Unit = {
-
     
     sqlContext.sql("use bigdata")
     sqlContext.sql("select * from t_pages_click ").registerTempTable("tPagesClick")
