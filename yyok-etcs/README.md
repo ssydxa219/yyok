@@ -27,21 +27,7 @@ export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 export ZOOKEEPER_HOME=$BASE_HOME/zookeeper
 export PATH=$PATH:$ZOOKEEPER_HOME/bin
 export HADOOP_HOME=$BASE_HOME/hadoop
-export HADOOP_PID_DIR=$HADOOP_HOME/pids
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export HADOOP_OPTS="$HADOOP_OPTS-Djava.library.path=$HADOOP_HOME/lib/native"
-export HADOOP_PREFIX=$HADOOP_HOME
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export HDFS_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export JAVA_LIBRARY_PATH=$HADOOP_HOME/lib/native
-export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+
 
 
 source /etc/profile
