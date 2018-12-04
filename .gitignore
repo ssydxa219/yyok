@@ -1,6 +1,7 @@
 # Built application files and Maven
 target/
 _linux/
+_windows/
 codestyles/
 debugger.xml
 markdown.xml
@@ -14,6 +15,13 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
+.cache-main
+filetypes.xml
+debugger.xml
+colors.scheme.xml
+project.default.xml
+ide.general.xml
+github.xml
 .mvn/timing.properties
 # java compiled class files
 *.class
@@ -73,5 +81,4 @@ gen/
 .settings/
 */log
 log/
-/site
-src/site
+/site/
