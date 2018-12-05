@@ -337,7 +337,7 @@ echo "==================$files======================="
 					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2-src.tar.gz
 					tar -zxvf hadoop-2.9.2-src.tar.gz
 					mv hadoop-2.9.2-src.tar.gz tars
-					wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.1.1/hadoop-3.1.1-src.tar.gz
+					wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.1/hadoop-3.1.1-src.tar.gz
 					tar -zxvf hadoop-3.1.1-src.tar.gz
 					mv hadoop-3.1.1-src.tar.gz tars
 			fi
@@ -356,7 +356,7 @@ echo "==================$files======================="
 				mv apache-hive-2.3.4-bin /ddhome/src/hive
 			fi
 			if [[ $files =~ 'spark' || ! -x 'spark' ]]; then
-					wget http://mirrors.shu.edu.cn/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
+					wget http://mirror.bit.edu.cn/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
 					tar -zxvf spark-2.4.0-bin-hadoop2.7.tgz
 					mv spark-2.4.0-bin-hadoop2.7.tgz tars
 					wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0.tgz

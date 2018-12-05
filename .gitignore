@@ -1,8 +1,8 @@
 # Built application files and Maven
-target/
-_linux/
-_windows/
-codestyles/
+/target
+/_linux
+/_windows
+/codestyles
 debugger.xml
 markdown.xml
 projectView.xml

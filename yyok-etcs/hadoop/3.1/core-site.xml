@@ -54,6 +54,38 @@
 		<value>*</value>
 	</property>
 	<property>
+		<name>hadoop.proxyuser.admin.hosts</name>
+		<value>*</value>
+	</property>
+	<property>
+		<name>hadoop.proxyuser.admin.groups</name>
+		<value>*</value>
+	</property>
+	<property>
+		<name>hadoop.proxyuser.hue.hosts</name>
+		<value>*</value>
+	</property>
+	<property>
+		<name>hadoop.proxyuser.hue.groups</name>
+		<value>*</value>
+	</property>
+	<property>
+		<name>hadoop.proxyuser.httpfs.hosts</name>
+		<value>*</value>
+	</property>
+	<property>
+        <name>hadoop.proxyuser.httpfs.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.superuser.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.superuser.groups</name>
+        <value>*</value>
+    </property>
+	<property>
 		<name>ha.zookeeper.session-timeout.ms</name>
 		<value>30000</value>
 		<description>ms</description>
