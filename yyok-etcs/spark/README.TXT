@@ -20,5 +20,6 @@ spark-shell --master spark://101.37.14.199:7077 --executor-memory 512m --driver-
 
 http://101.37.14.63:8088/
 http://101.37.14.199:8081/
+http://101.37.14.199:8080
 
 
