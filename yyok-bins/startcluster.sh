@@ -41,6 +41,7 @@ echo "==============$un================"
         hdfs haadmin -getServiceState nna
         hdfs haadmin -getServiceState nnb
         $bh/hbase/bin/hbase-daemon.sh start master
+        $bh/hbase/bin/hbase-daemon.sh start thrift
         $bh/hive/bin/hive --service metastore 1>/dev/null 2>&1 &
         $bh/hive/bin/hive --service hiveserver2 1>/dev/null 2>&1 &
     fi

@@ -42,6 +42,7 @@ echo "==============$un================"
         hdfs haadmin -getServiceState nna
         hdfs haadmin -getServiceState nnb
         $bh/hadoop/sbin/stop-all.sh
+        $bh/hbase/bin/hbase-daemon.sh stop thrift
 
     fi
     if [ $un == 'ddb' ];then

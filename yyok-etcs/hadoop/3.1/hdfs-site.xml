@@ -121,4 +121,33 @@
 		<name>ha.failover-controller.cli-check.rpc-timeout.ms</name>
 		<value>60000</value>
 	</property>
+	<property>
+		<name>dfs.client.read.shortcircuit</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.domain.socket.path</name>
+		<value>/ddhome/bin/hadoop/tmp/dn._PORT</value>
+	</property>
+	<property>
+		<name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.client.use.legacy.blockreader.local</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.datanode.data.dir.perm</name>
+		<value>750</value>
+	</property>
+	<property>
+		<name>dfs.block.local-path-access.user</name>
+		<value>impala</value>
+	</property>
+	<property>
+		<name>dfs.client.file-block-storage-locations.timeout</name>
+		<value>3000</value>
+	</property>
+
 </configuration>
