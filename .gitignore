@@ -32,6 +32,9 @@ github.xml
 # About IntelliJ
 *.iml
 /.idea
+/.metadata
+.gitignore
+/RemoteSystemsTempFiles
 /out
 # BlueJ files
 *.ctxt
