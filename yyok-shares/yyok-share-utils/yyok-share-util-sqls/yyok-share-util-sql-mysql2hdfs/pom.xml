@@ -11,10 +11,14 @@
 
     <groupId>com.yyokay.share.util.sqls</groupId>
     <artifactId>yyok-share-util-sql-mysql2hdfs</artifactId>
+    <packaging>pom</packaging>
 
     <name>yyok-share-util-sql-mysql2hdfs</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+    <modules>
+        <module>yyok-share-util-sql-spark</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -85,7 +85,27 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>maven-repo</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <url>http://mvnrepository.com/artifact/</url>
+        </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-repo</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>mvnrepository</id>
+            <url>http://mvnrepository.com/artifact/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencyManagement>
         <dependencies>
@@ -98,6 +118,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+
 
     <build>
         <plugins> <!--编译插件-->

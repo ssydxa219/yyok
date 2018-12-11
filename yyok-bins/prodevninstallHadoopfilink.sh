@@ -9,6 +9,42 @@ fi
 echo -e "\033[31m 这个是centos7系统初始化脚本，请慎重运行！Please continue to enter or ctrl+C to cancel \033[0m"
 sleep 5
 
+
+evn_profile(){
+cat >> /etc/profile << EOF
+export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64/
+export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
+export PATH=$PATH:${JAVA_HOME}/bin
+export SCALA_HOME=/ddhome/bin/scala
+export PATH=$PATH:${SCALA_HOME}/bin
+export MAVEN_HOME=/ddhome/bin/maven
+export PATH=$PATH:${MAVEN_HOME}/bin
+export ZOOKEEPER_HOME=/ddhome/bin/zookeeper
+export PATH=$PATH:${ZOOKEEPER_HOME}/bin
+export HADOOP_HOME=/ddhome/bin/hadoop
+export HADOOP_PREFIX=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_INSTALL=$HADOOP_HOME
+export HBASE_HOME=/ddhome/bin/hbase
+export PATH=$PATH:${HBASE_HOME}/bin
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export MAPREDUCE_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HBASE_CONF_DIR=${HBASE_HOME}/conf
+TMOUT=300
+HISTSIZE=5
+HISTFILESIZE=5
+
+EOF
+source /etc/profile
+
+}
+
 #hostname
 hostname_config(){
     HostName=$(echo "ip"-$(ip addr|grep inet|grep brd|grep scope|awk '{print $2}'|awk -F '/' '{print $1}'|sed 's/\./-/g'))
@@ -261,30 +297,6 @@ cd /ddhome/src
 echo "-------down ----------"
 #rpm -ivh install/jdk-8u192-linux-x64.rpm
 
-cat >> /etc/profile << EOF
-export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
-export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
-export PATH=$PATH:${JAVA_HOME}/bin
-export SCALA_HOME=/ddhome/bin/scala
-export PATH=$PATH:${SCALA_HOME}/bin
-export MAVEN_HOME=/ddhome/bin/maven
-export PATH=$PATH:${MAVEN_HOME}/bin
-export ZOOKEEPER_HOME=/ddhome/bin/zookeeper
-export PATH=$PATH:${ZOOKEEPER_HOME}/bin
-export HADOOP_HOME=/ddhome/bin/hadoop
-export HADOOP_PREFIX=$HADOOP_HOME
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
-export HADOOP_INSTALL=$HADOOP_HOME
-export HBASE_HOME=/ddhome/bin/hbase
-export PATH=$PATH:${HBASE_HOME}/bin
-EOF
-source /etc/profile
-
 #----------------down tar -zxvf mv -------------------
 
 echo " -----------------jdk------------------"
@@ -423,6 +435,7 @@ echo "------------------优化完成--------------------"
 main(){
     #修改字符集
     #sed -i 's/LANG="en_US.UTF-8"/LANG="zh_CN.UTF-8"/' /etc/locale.conf
+#    evn_profile
 #    hostname_config
 #    yum_config
 #    yum_tools

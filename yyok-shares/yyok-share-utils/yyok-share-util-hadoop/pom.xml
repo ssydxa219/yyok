@@ -100,11 +100,13 @@
 			<version>${spark.version}</version>
 		</dependency>
 
+<!--
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-mllib_${scala.version}</artifactId>
 			<version>${spark.version}</version>
 		</dependency>
+-->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
@@ -119,6 +121,26 @@
 		</dependency>
 
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>maven-repo</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://mvnrepository.com/artifact/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
