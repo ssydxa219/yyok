@@ -14,129 +14,129 @@
 -->
 <configuration>
 
-	<property>
-       <name>yarn.resourcemanager.connect.retry-interval.ms</name>
-       <value>2000</value>
+    <property>
+        <name>yarn.resourcemanager.connect.retry-interval.ms</name>
+        <value>2000</value>
     </property>
     <property>
-       <name>yarn.resourcemanager.ha.enabled</name>
-    	<value>true</value>
+        <name>yarn.resourcemanager.ha.enabled</name>
+        <value>true</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.ha.rm-ids</name>
-      <value>rma,rmb</value>
+        <name>yarn.resourcemanager.ha.rm-ids</name>
+        <value>rma,rmb</value>
     </property>
     <property>
-      <name>ha.zookeeper.quorum</name>
-      <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
+        <name>ha.zookeeper.quorum</name>
+        <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
     </property>
     <property>
-       <name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
-       <value>true</value>
+        <name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
+        <value>true</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.hostname.rma</name>
-      <value>ddb</value>
+        <name>yarn.resourcemanager.hostname.rma</name>
+        <value>ddb</value>
     </property>
     <property>
-       <name>yarn.resourcemanager.hostname.rmb</name>
-       <value>ddc</value>
+        <name>yarn.resourcemanager.hostname.rmb</name>
+        <value>ddc</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.ha.id</name>
-		<value>rma</value>
+        <name>yarn.resourcemanager.ha.id</name>
+        <value>rma</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.recovery.enabled</name>
-      <value>true</value>
+        <name>yarn.resourcemanager.recovery.enabled</name>
+        <value>true</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.zk-state-store.address</name>
-      <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
+        <name>yarn.resourcemanager.zk-state-store.address</name>
+        <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.store.class</name>
-      <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+        <name>yarn.resourcemanager.store.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.zk-address</name>
-      <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
+        <name>yarn.resourcemanager.zk-address</name>
+        <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
     </property>
     <property>
         <name>yarn.resourcemanager.cluster-id</name>
         <value>jianbing</value>
     </property>
     <property>
-      <name>yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms</name>
-      <value>5000</value>
+        <name>yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms</name>
+        <value>5000</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.address.rma</name>
-      <value>ddb:8132</value>
+        <name>yarn.resourcemanager.address.rma</name>
+        <value>ddb:8132</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.scheduler.address.rma</name>
-      <value>ddb:8130</value>
+        <name>yarn.resourcemanager.scheduler.address.rma</name>
+        <value>ddb:8130</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.webapp.address.rma</name>
-      <value>ddb:8188</value>
+        <name>yarn.resourcemanager.webapp.address.rma</name>
+        <value>ddb:8188</value>
     </property>
     <property>
-       <name>yarn.resourcemanager.resource-tracker.address.rma</name>
-       <value>ddb:8131</value>
+        <name>yarn.resourcemanager.resource-tracker.address.rma</name>
+        <value>ddb:8131</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.admin.address.rma</name>
-      <value>ddb:8033</value>
+        <name>yarn.resourcemanager.admin.address.rma</name>
+        <value>ddb:8033</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.ha.admin.address.rma</name>
-      <value>ddb:23142</value>
+        <name>yarn.resourcemanager.ha.admin.address.rma</name>
+        <value>ddb:23142</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.address.rmb</name>
-      <value>ddc:8132</value>
+        <name>yarn.resourcemanager.address.rmb</name>
+        <value>ddc:8132</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.scheduler.address.rmb</name>
-      <value>ddc:8130</value>
+        <name>yarn.resourcemanager.scheduler.address.rmb</name>
+        <value>ddc:8130</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.webapp.address.rmb</name>
-      <value>ddc:8188</value>
+        <name>yarn.resourcemanager.webapp.address.rmb</name>
+        <value>ddc:8188</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.resource-tracker.address.rmb</name>
-      <value>ddc:8131</value>
+        <name>yarn.resourcemanager.resource-tracker.address.rmb</name>
+        <value>ddc:8131</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.admin.address.rmb</name>
-      <value>ddc:8033</value>
+        <name>yarn.resourcemanager.admin.address.rmb</name>
+        <value>ddc:8033</value>
     </property>
     <property>
-      <name>yarn.resourcemanager.ha.admin.address.rmb</name>
-      <value>ddc:23142</value>
+        <name>yarn.resourcemanager.ha.admin.address.rmb</name>
+        <value>ddc:23142</value>
     </property>
     <property>
-      <name>yarn.nodemanager.aux-services</name>
-      <value>mapreduce_shuffle</value>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
     </property>
     <property>
-      <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
-      <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
     </property>
     <property>
-      <name>yarn.nodemanager.local-dirs</name>
-      <value>/data/local/hadoop/yarn</value>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>/data/local/hadoop/yarn</value>
     </property>
     <property>
-      <name>yarn.nodemanager.log-dirs</name>
-      <value>/data/local/hadoop/log</value>
+        <name>yarn.nodemanager.log-dirs</name>
+        <value>/data/local/hadoop/log</value>
     </property>
     <property>
-      <name>mapreduce.shuffle.port</name>
-      <value>23080</value>
+        <name>mapreduce.shuffle.port</name>
+        <value>23080</value>
     </property>
     <property>
         <name>yarn.client.failover-proxy-provider</name>
@@ -145,39 +145,46 @@
     <property>
         <name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
         <value>/data/local/hadoop/yarn-leader-election</value>
-    <description>Optional setting. The default value is /yarn-leader-election</description>
+        <description>Optional setting. The default value is /yarn-leader-election</description>
     </property>
-	<property>
-		<name>yarn.log-aggregation-enable</name>
-		<value>true</value>
-	</property>
-	<property>
-		<name>yarn.log-aggregation.retain-seconds</name>
-		<value>86400</value>
-	</property>
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>86400</value>
+    </property>
     <!--它们表示单个容器可以申请的最小与最大内存。-->
     <property>
         <description>The minimum allocation for every container request at the RM,
             in MBs. Memory requests lower than this won‘t take effect,
-            and the specified value will get allocated at minimum.</description>
+            and the specified value will get allocated at minimum.
+        </description>
         <name>yarn.scheduler.minimum-allocation-mb</name>
         <value>2048</value>
     </property>
     <property>
         <description>The maximum allocation for every container request at the RM,
             in MBs. Memory requests higher than this won‘t take effect,
-            and will get capped to this value.</description>
+            and will get capped to this value.
+        </description>
         <name>yarn.scheduler.maximum-allocation-mb</name>
         <value>8192</value>
     </property>
     <!--前者表示单个节点可用的最大内存，RM中的两个值都不应该超过该值。后者表示虚拟内存率，即占task所用内存的百分比，默认为2.1.-->
     <property>
         <description>Amount of physical memory, in MB, that can be allocated
-            for containers.</description>
+            for containers.
+        </description>
         <name>yarn.nodemanager.resource.memory-mb</name>
         <value>40960</value>
     </property>
-
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+        <description>Whether virtual memory limits will be enforced for containers</description>
+    </property>
     <property>
         <description>Ratio between virtual memory to physical memory when
             setting memory limits for containers. Container allocations are

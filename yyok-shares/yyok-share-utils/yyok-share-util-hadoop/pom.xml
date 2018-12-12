@@ -15,7 +15,7 @@
 
 	<properties>
 		<hadoop.version>3.1.1</hadoop.version>
-		<hbase.version>2.1.1</hbase.version>
+		<hbase.version>1.4.8</hbase.version>
 		<spark.version>2.4.0</spark.version>
 		<scala.version>2.12</scala.version>
 	</properties>
@@ -100,13 +100,11 @@
 			<version>${spark.version}</version>
 		</dependency>
 
-<!--
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-mllib_${scala.version}</artifactId>
 			<version>${spark.version}</version>
 		</dependency>
--->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
@@ -121,26 +119,6 @@
 		</dependency>
 
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>maven-repo</id>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>mvnrepository</id>
-			<url>http://mvnrepository.com/artifact/</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>

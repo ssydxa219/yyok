@@ -14,7 +14,10 @@
 	<artifactId>yyok-libs</artifactId>
 
 	<name>yyok-libs</name>
-	<packaging>pom</packaging>
+    <modules>
+        <module>yyok-lib-mrs</module>
+    </modules>
+    <packaging>pom</packaging>
 	<!-- FIXME change it to the project's website -->
 	<url>http://maven.apache.org/</url>
 	<inceptionYear>2001</inceptionYear>

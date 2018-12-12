@@ -34,6 +34,12 @@
         <common.lang3.version>3.7</common.lang3.version>
         <org.projectlombok.version>1.16.20</org.projectlombok.version>
         <log4j.version>1.2.17</log4j.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spark.version>2.4.0</spark.version>
+        <scala.version>2.12.7</scala.version>
+        <scala.spark.version>2.12</scala.spark.version>
+        <hadoop.version>3.1.1</hadoop.version>
+        <mysql.version>5.1.39</mysql.version>
     </properties>
 
 
