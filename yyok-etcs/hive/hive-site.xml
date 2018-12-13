@@ -2518,7 +2518,7 @@
 
     <property>
         <name>hive.execution.engine</name>
-        <value>mr</value>
+        <value>spark</value>
         <description>
             Chooses execution engine. Options are mr (MapReduce, default) or Tez (Hadoop 2 only).
         </description>
