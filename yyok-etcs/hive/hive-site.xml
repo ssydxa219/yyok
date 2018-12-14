@@ -137,7 +137,7 @@
 
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://10.80.58.161:3306/jianbing_hive?useSSL=true</value>
+        <value>jdbc:mysql://10.80.58.161:3306/jianbing_hive?createDatabaseIfNotExist=true&amp;useSSL=false</value>
         <description>JDBC connect string for a JDBC metastore</description>
     </property>
 
