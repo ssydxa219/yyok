@@ -28,7 +28,7 @@
     </property>
     <property>
         <name>ha.zookeeper.quorum</name>
-        <value>dda:2181,ddb:2181,ddc:2181,dde:2181,ddf:2181</value>
+        <value>ddx:2181,ddy:2181,ddz:218</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
@@ -36,11 +36,11 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname.rma</name>
-        <value>ddb</value>
+        <value>ddy</value>
     </property>
     <property>
         <name>yarn.resourcemanager.hostname.rmb</name>
-        <value>ddc</value>
+        <value>ddz</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.id</name>
@@ -72,51 +72,51 @@
     </property>
     <property>
         <name>yarn.resourcemanager.address.rma</name>
-        <value>ddb:8132</value>
+        <value>ddy:8132</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address.rma</name>
-        <value>ddb:8130</value>
+        <value>ddy:8130</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address.rma</name>
-        <value>ddb:8188</value>
+        <value>ddy:8188</value>
     </property>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address.rma</name>
-        <value>ddb:8131</value>
+        <value>ddy:8131</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address.rma</name>
-        <value>ddb:8033</value>
+        <value>ddy:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.admin.address.rma</name>
-        <value>ddb:23142</value>
+        <value>ddy:23142</value>
     </property>
     <property>
         <name>yarn.resourcemanager.address.rmb</name>
-        <value>ddc:8132</value>
+        <value>ddz:8132</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address.rmb</name>
-        <value>ddc:8130</value>
+        <value>ddz:8130</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address.rmb</name>
-        <value>ddc:8188</value>
+        <value>ddz:8188</value>
     </property>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address.rmb</name>
-        <value>ddc:8131</value>
+        <value>ddz:8131</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address.rmb</name>
-        <value>ddc:8033</value>
+        <value>ddz:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.admin.address.rmb</name>
-        <value>ddc:23142</value>
+        <value>ddz:23142</value>
     </property>
     <property>
         <name>yarn.nodemanager.aux-services</name>

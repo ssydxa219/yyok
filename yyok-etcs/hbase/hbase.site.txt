@@ -2,6 +2,8 @@ http://101.37.14.199:60010
 http://118.31.173.146:16030/
 http://101.37.14.63:60010
 
+mvn -f pom.xml.hadoop3 install -DskipTests assembly:single -Prelease
+
 Table       (HBase table)
     Region       (Regions for the table)
          Store          (Store per ColumnFamily for each Region for the table)

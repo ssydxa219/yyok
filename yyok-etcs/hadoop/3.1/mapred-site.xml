@@ -26,13 +26,13 @@
     <!-- 指定mapreduce jobhistory地址 -->
     <property>
         <name>mapreduce.jobhistory.address</name>
-        <value>ddb:10020</value>
+        <value>ddx:10020</value>
     </property>
 
     <!-- 任务历史服务器的web地址 -->
     <property>
         <name>mapreduce.jobhistory.webapp.address</name>
-        <value>ddb:19888</value>
+        <value>ddx:19888</value>
     </property>
 
     <property>
@@ -89,5 +89,38 @@
     mapreduce.reduce.java.opts
 
     -->
+
+    <property>
+        <name>mapred.task.java.opts</name>
+        <value>-Xmx2000m</value>
+    </property>
+
+    <property>
+        <name>mapred.child.java.opts</name>
+        <value>${mapred.task.java.opts} -Xmx1000m</value>
+        <final>true</final>
+    </property>
+
+    <property>
+        <name>mapreduce.admin.map.child.java.opts</name>
+        <value>-Xmx1024m</value>
+    </property>
+
+    <property>
+        <name>mapreduce.admin.reduce.child.java.opts</name>
+        <value>-Xmx1536m</value>
+    </property>
+
+
+
+    <property>
+        <name>mapred.map.child.java.opts</name>
+        <value>-Xmx512m</value>
+    </property>
+
+    <property>
+        <name>mapred.reduce.child.java.opts</name>
+        <value>-Xmx1024m</value>
+    </property>
 
 </configuration>

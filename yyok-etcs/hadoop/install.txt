@@ -1,3 +1,8 @@
 http://101.37.14.199:8188/cluster
 http://xuanwu.51gjj.com:50070
 http://101.37.14.63:50070
+
+mvn package -Pdist,native -DskipTests-Dtar-Dmaven.javadoc.skip=true
+
+mvn clean package -Pdist,native,docs -DskipTests -Dtar
+

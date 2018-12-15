@@ -291,6 +291,17 @@
         <value>10002</value>
     </property>
     -->
+
+    <property>
+        <name>datanucleus.fixedDatastore </name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+
     <property>
         <name>hive.metastore.event.listeners</name>
         <value></value>
@@ -2533,6 +2544,42 @@
             Chooses execution engine. Options are mr (MapReduce, default) or Tez (Hadoop 2 only).
         </description>
     </property>
+    <property>
+        <name>spark.home</name>
+        <value>/ddhome/bin/spark</value>
+    </property>
+    <property>
+        <name>spark.master</name>
+        <value>spark://ddb:7077</value>
+    </property>
+    <property>
+        <name>spark.submit.deployMode</name>
+        <value>client</value>
+    </property>
+    <property>
+        <name>spark.eventLog.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>spark.eventLog.dir</name>
+        <value>hdfs://jianbing/spark-log</value>
+    </property>
+    <property>
+        <name>spark.serializer</name>
+        <value>org.apache.spark.serializer.KryoSerializer</value>
+    </property>
+    <property>
+        <name>spark.executor.memeory</name>
+        <value>1024m</value>
+    </property>
+    <property>
+        <name>spark.driver.memeory</name>
+        <value>512m</value>
+    </property>
+    <property>
+        <name>spark.executor.extraJavaOptions</name>
+        <value>-XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"</value>
+    </property>
 
     <property>
         <name>hive.prewarm.enabled</name>
@@ -2993,6 +3040,16 @@
         <description>Number of aborted transactions involving a particular table or partition before major compaction is
             initiated.
         </description>
+    </property>
+
+    <property>
+        <name>hive.metastore.local</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>spark.master</name>
+        <value>spark://ddb:7077</value>
     </property>
 
 </configuration>
