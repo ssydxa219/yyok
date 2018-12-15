@@ -129,13 +129,24 @@
 		<name>dfs.domain.socket.path</name>
 		<value>/ddhome/bin/hadoop/tmp/dn._PORT</value>
 	</property>
+
+	<property>
+		<name>dfs.client.file-block-storage-locations.timeout.millis</name>
+		<value>10000</value>
+	</property>
+
+	<property>
+		<name>dfs.client.read.shortcircuit.skip.checksum</name>
+		<value>false</value>
+	</property>
+
 	<property>
 		<name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
 		<value>true</value>
 	</property>
 	<property>
 		<name>dfs.client.use.legacy.blockreader.local</name>
-		<value>true</value>
+		<value>false</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir.perm</name>
@@ -148,6 +159,12 @@
 	<property>
 		<name>dfs.client.file-block-storage-locations.timeout</name>
 		<value>3000</value>
+	</property>
+
+	<property>
+		<name>hadoop.native.lib</name>
+		<value>true</value>
+		<description>Should nativehadoop libraries, if present, be used.</description>
 	</property>
 
 </configuration>

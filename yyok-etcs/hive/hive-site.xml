@@ -130,7 +130,7 @@
 
     <property>
         <name>hive.metastore.uris</name>
-        <value></value>
+        <value>thrift://10.80.58.161:9083</value>
         <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.
         </description>
     </property>
@@ -280,7 +280,17 @@
             false, client setting will be ignored.
         </description>
     </property>
+    <!--
+    <property>
+        <name>hive.server2.webui.host</name>
+        <value>172.16.212.17</value>
+    </property>
 
+    <property>
+        <name>hive.server2.webui.port</name>
+        <value>10002</value>
+    </property>
+    -->
     <property>
         <name>hive.metastore.event.listeners</name>
         <value></value>
@@ -377,7 +387,7 @@
 
     <property>
         <name>hive.metastore.client.socket.timeout</name>
-        <value>20</value>
+        <value>36000</value>
         <description>MetaStore Client socket timeout in seconds</description>
     </property>
 

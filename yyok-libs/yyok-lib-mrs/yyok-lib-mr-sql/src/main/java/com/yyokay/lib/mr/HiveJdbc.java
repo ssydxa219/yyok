@@ -21,7 +21,7 @@ public class HiveJdbc {
         // get connection
         Connection con = DriverManager.getConnection("jdbc://hive://101.37.14.63:10000/jianbing_hive", "root", "");
         Statement stmt = con.createStatement();
-        stmt.executeQuery("DROP DATABASE userdb");
+        //stmt.executeQuery("DROP DATABASE userdb");
 
         System.out.println("Drop userdb database successful.");
 
@@ -34,7 +34,7 @@ public class HiveJdbc {
         HiveContext hiveContext = new HiveContext(sc);
         SQLContext sqlContext = new SQLContext(sc);
         //查询表前10条数据
-        hiveContext.sql("select * from bi_ods.owms_m_locator limit 10").show();
+       // hiveContext.sql("select * from bi_ods.owms_m_locator limit 10").show();
 
         sc.stop();
 
