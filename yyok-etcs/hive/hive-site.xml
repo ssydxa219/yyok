@@ -2545,6 +2545,10 @@
         </description>
     </property>
     <property>
+        <name>hive.enable.spark.execution.engine</name>
+        <value>true</value>
+    </property>
+    <property>
         <name>spark.home</name>
         <value>/ddhome/bin/spark</value>
     </property>

@@ -6,6 +6,8 @@ export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 
 mvn clean package -Pyarn -Phadoop-3.1.1 -Pspark-ganglia-lgpl -Pkinesis-asl -Phive -DskipTests
 
+mvn -Pyarn -Dyarn.version=2.9.10 -Phadoop-2.9 -Dhadoop.version=2.9.1 -DskipTests clean package
+
 1. 生成支持yarn 、hadoop3.1.1 、hive 的部署包：
 cd /ddhome/src/spark-2.4.0/dev
 
@@ -55,4 +57,10 @@ sparkAssemblyPath='ls ${SPARK_HOME}/lib/spark-assembly-*.jar'
 将其修改为：sparkAssemblyPath='ls ${SPARK_HOME}/jars/*.jar'
 
 #spark1 拷贝spark/lib/spark-* 到/usr/app/hive/lib
+
+
+FAILED: SemanticException Failed to get a spark session: org.apache.hadoop.hive.ql.metadata.HiveException: Failed to create spark client.
+
+
+java.sql.SQLException: org.apache.hive.service.cli.HiveSQLException: Error while processing statement: FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.spark.SparkTask. Failed to create spark client.
 

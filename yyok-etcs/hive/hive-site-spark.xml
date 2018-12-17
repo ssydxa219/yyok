@@ -93,12 +93,12 @@
     </property>
     <property>
         <name>spark.home</name>
-        <value>/usr/app/spark</value>
+        <value>/ddhome/bin/spark</value>
     </property>
     <property>
         <name>spark.master</name>
         <value>spark://ddb:7077</value>
-        <description>dyarn-cluster/yarn-client</description>
+        <description>jianbing-cluster/yarn-client</description>
     </property>
     <property>
         <name>spark.submit.deployMode</name>
@@ -110,7 +110,7 @@
     </property>
     <property>
         <name>spark.eventLog.dir</name>
-        <value>hdfs://xinfang:9000/spark-log</value>
+        <value>hdfs://jianbing/data/spark-log</value>
     </property>
     <property>
         <name>spark.serializer</name>
