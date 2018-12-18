@@ -68,3 +68,7 @@ echo "==============$un================"
     jps
     exit"
 done
+
+
+hdfs --daemon start httpfs
+mapred --daemon start
