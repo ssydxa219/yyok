@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+YARN_RESOURCEMANAGER_USER=root
+YARN_NODEMANAGER_USER=root

@@ -17,63 +17,95 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<property>
-		<name>fs.defaultFS</name>
-		<value>hdfs://jianbing</value>
-	</property>
-	<property>
-		<name>io.file.buffer.size</name>
-		<value>131072</value>
-	</property>
-	<property>
-		<name>hadoop.tmp.dir</name>
-		<value>/data/local/hadoop/tmp</value>
-	</property>
-	<property>
-		<name>dfs.journalnode.edits.dir</name>
-		<value>/data/local/hadoop/journalnode</value>
-	</property>
-	<property>
-		<name>ha.zookeeper.quorum</name>
-		<value>ddx:2181,ddy:2181,ddx:2181</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.root.hosts</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.root.groups</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.hive.hosts</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.hive.groups</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.admin.hosts</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.admin.groups</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.hue.hosts</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.hue.groups</name>
-		<value>*</value>
-	</property>
-	<property>
-		<name>hadoop.proxyuser.httpfs.hosts</name>
-		<value>*</value>
-	</property>
-	<property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://jianbing</value>
+    </property>
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>131072</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/data/local/hadoop/tmp</value>
+    </property>
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/data/local/hadoop/journalnode</value>
+    </property>
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>ddx:2181,ddy:2181,ddx:2181</value>
+    </property>
+    <!--修改core-site.xml中的ipc参数,防止出现连接journalnode服务ConnectException-->
+    <property>
+        <name>ipc.client.connect.max.retries</name>
+        <value>100</value>
+        <description>Indicates the number of retries a client will make to establish a server connection.</description>
+    </property>
+    <property>
+        <name>ipc.client.connect.retry.interval</name>
+        <value>10000</value>
+        <description>Indicates the number of milliseconds a client will wait for before retrying to establish a server
+            connection.
+        </description>
+    </property>
+    <property>
+        <name>hadoop.native.lib</name>
+        <value>true</value>
+        <description>Should native hadoop libraries, if present, be used.</description>
+    </property>
+
+    <property>
+        <name>hadoop.proxyuser.hdfs.hosts</name>
+        <value>*</value>
+        <description>Defines the Unix user, hdfs, that will run the HttpFS server as
+            a proxyuser.
+        </description>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hdfs.groups</name>
+        <value>*</value>
+        <description>Replaces hdfs with the Unix user that will start the HttpFS server.
+        </description>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.root.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.root.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hive.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hive.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.admin.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.admin.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hue.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hue.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.httpfs.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
         <name>hadoop.proxyuser.httpfs.groups</name>
         <value>*</value>
     </property>
@@ -85,24 +117,21 @@
         <name>hadoop.proxyuser.superuser.groups</name>
         <value>*</value>
     </property>
-	<property>
-		<name>ha.zookeeper.session-timeout.ms</name>
-		<value>30000</value>
-		<description>ms</description>
-	</property>
-
-	<property>
-		<name>fs.trash.interval</name>
-		<value>4320</value>
-	</property>
-
-	<property>
-		<name>fs.trash.checkpoint.interval</name>
-		<value>60</value>
-	</property>
-
-	<property>
-		<name>dfs.ha.fencing.methods</name>
-		<value>null</value>
-	</property>
+    <property>
+        <name>ha.zookeeper.session-timeout.ms</name>
+        <value>30000</value>
+        <description>ms</description>
+    </property>
+    <property>
+        <name>fs.trash.interval</name>
+        <value>4320</value>
+    </property>
+    <property>
+        <name>fs.trash.checkpoint.interval</name>
+        <value>60</value>
+    </property>
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>null</value>
+    </property>
 </configuration>

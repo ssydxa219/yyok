@@ -35,11 +35,11 @@ echo "==============$un================"
         $bh/hadoop/sbin/start-all.sh
        # hdfs haadmin -transitionToStandby -forcemanual nna
        # hdfs haadmin -transitionToStandby -forcemanual nnb
-        hdfs haadmin -getServiceState nna
-        hdfs haadmin -getServiceState nnb
-        hdfs haadmin -transitionToActive --forcemanual nna
-        hdfs haadmin -getServiceState nna
-        hdfs haadmin -getServiceState nnb
+        $bh/hadoop/bin/hdfs haadmin -getServiceState nna
+        $bh/hadoop/bin/hdfs haadmin -getServiceState nnb
+        $bh/hadoop/bin/hdfs haadmin -transitionToActive --forcemanual nna
+        $bh/hadoop/bin/hdfs haadmin -getServiceState nna
+        $bh/hadoop/bin/hdfs haadmin -getServiceState nnb
         $bh/hbase/bin/hbase-daemon.sh start master
         $bh/hbase/bin/hbase-daemon.sh start thrift
         $bh/hive/bin/hive --service metastore 1>/dev/null 2>&1 &
@@ -48,14 +48,16 @@ echo "==============$un================"
     if [ $un == 'ddb' ];then
         $bh/hadoop/sbin/start-yarn.sh
         $bh/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
-        yarn rmadmin -getServiceState rma
+        $bh/hadoop/bin/ mapred --daemon start
+        $bh/hadoop/bin/yarn rmadmin -getServiceState rma
         $bh/hbase/bin/hbase-daemon.sh start master
         $bh/spark/sbin/start-all.sh
     fi
     if [ $un == 'ddc' ];then
         $bh/hadoop/sbin/start-yarn.sh
         $bh/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
-        yarn rmadmin -getServiceState rmb
+        $bh/hadoop/bin/ mapred --daemon start
+        $bh/hadoop/bin/yarn rmadmin -getServiceState rmb
         $bh/hbase/bin/hbase-daemon.sh start regionserver
     fi
     if [ $un == 'dde' -o $un == 'ddf' ]

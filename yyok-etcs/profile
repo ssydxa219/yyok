@@ -26,6 +26,7 @@ export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 export MYSQL_HOME=/ddhome/bin/mysql
 export PATH=$PATH:$MYSQL_HOME/bin
 
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH:$JAVA_LIBRARY_PATH
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/"
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HDFS_CONF_DIR=$HADOOP_HOME/etc/hadoop
