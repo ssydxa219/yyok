@@ -1,4 +1,11 @@
 
+
+nohup java -jar /ddhome/tmp/hf-lib-other-logstreaming-1.0.1.jar >/ddhome/logs/hf-logstreaming.log 2>&1 &
+
+
+
+
+
 hostnamectl --static set-hostname DDX
 -----------
 

@@ -20,7 +20,7 @@ export HADOOP_INSTALL=$HADOOP_HOME
 export HBASE_HOME=/ddhome/bin/hbase
 export PATH=$PATH:${HBASE_HOME}/bin
 export HIVE_HOME=/ddhome/bin/hive
-export PATH=$PATH:$HIVE_HOME/bin
+
 export SPARK_HOME=/ddhome/bin/spark
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 export MYSQL_HOME=/ddhome/bin/mysql

@@ -62,6 +62,38 @@
         <name>mapreduce.reduce.env</name>
         <value>/ddhome/bin/hadoop</value>
     </property>
+
+    <property>
+        <name>mapreduce.cluster.local.dir</name>
+        <value>/ddhome/bin/hadoop/tmp,/data/local/hadoop/tmp</value>
+    </property>
+
+    <property>
+        <name>mapreduce.shuffle.readahead.bytes</name>
+        <value>200000000</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobtracker.heartbeat.interval.min</name>
+        <value>1000</value>
+    </property>
+
+    <property>
+        <name>mapred.reduce.slowstart.completed.maps</name>
+        <value>0.5</value>
+    </property>
+
+
+    <property>
+        <name>mapreduce.ifile.readahead.bytes</name>
+        <value>20000000</value>
+    </property>
+
+    <property>
+        <name>mapreduce.tasktracker.outofband.heartbeat</name>
+        <value>true</value>
+    </property>
+
     <property>
         <name>mapreduce.job.jvm.numtasks</name>
         <value>10</value>
@@ -71,14 +103,39 @@
 
     <property>
         <name>mapreduce.map.speculative</name>
-        <value>true</value>
+        <value>false</value>
         <description>If true, then multiple instances of some map tasks may be executed in parallel.</description>
     </property>
 
     <property>
         <name>mapreduce.reduce.speculative</name>
-        <value>true</value>
-        <description>If true, then multiple instances of some reduce tasks  may be executed in parallel.</description>
+        <value>false</value>
+        <description>If true, then multiple instances of some reduce tasks may be executed in parallel.</description>
+    </property>
+
+    <property>
+        <name>mapreduce.task.io.sort.mb</name>
+        <value>1000</value>
+    </property>
+
+    <property>
+        <name>mapreduce.map.sort.spill.percent</name>
+        <value>0.8</value>
+    </property>
+
+    <property>
+        <name>mapreduce.map.output.compress</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>mapreduce.map.output.compress.codec</name>
+        <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+
+    <property>
+        <name>mapreduce.output.fileoutputformat.compress.type</name>
+        <value>BLOCK</value>
     </property>
 
     <!--mapreduce.map.memory.mb
@@ -89,6 +146,41 @@
     mapreduce.reduce.java.opts
 
     -->
+
+    <property>
+        <name>mapreduce.jobtracker.handler.count</name>
+        <value>30</value>
+    </property>
+
+    <property>
+        <name>mapreduce.tasktracker.http.threads</name>
+        <value>80</value>
+    </property>
+
+    <property>
+        <name>mapreduce.tasktracker.map.tasks.maximum</name>
+        <value>10</value>
+    </property>
+
+    <property>
+        <name>mapreduce.tasktracker.reduce.tasks.maximum</name>
+        <value>10</value>
+    </property>
+
+    <property>
+        <name>mapreduce.reduce.shuffle.input.buffer.percent</name>
+        <value>0.7</value>
+    </property>
+
+    <property>
+        <name>mapreduce.job.jvm.num.tasks</name>
+        <value>-1</value>
+    </property>
+
+    <property>
+        <name>mapreduce.reduce.shuffle.parallel.copies</name>
+        <value>10</value>
+    </property>
 
     <property>
         <name>mapred.task.java.opts</name>
@@ -110,7 +202,6 @@
         <name>mapreduce.admin.reduce.child.java.opts</name>
         <value>-Xmx1536m</value>
     </property>
-
 
 
     <property>

@@ -20,3 +20,9 @@ set spark.executor.instances=40;
 set spark.serializer=org.apache.spark.serializer.KryoSerializer;
 
 
+
+        hive --service metastore 1>/dev/null 2>&1 &
+        hive --service hiveserver2 1>/dev/null 2>&1 &
+
+
+

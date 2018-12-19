@@ -171,6 +171,13 @@
         <name>yarn.scheduler.maximum-allocation-mb</name>
         <value>8192</value>
     </property>
+
+
+    <property>
+        <name>yarn.nodemanager.resource.cpu-vcores</name>
+        <value>8</value>
+    </property>
+
     <!--前者表示单个节点可用的最大内存，RM中的两个值都不应该超过该值。后者表示虚拟内存率，即占task所用内存的百分比，默认为2.1.-->
     <property>
         <description>Amount of physical memory, in MB, that can be allocated

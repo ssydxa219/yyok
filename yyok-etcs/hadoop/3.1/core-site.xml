@@ -23,7 +23,7 @@
     </property>
     <property>
         <name>io.file.buffer.size</name>
-        <value>131072</value>
+        <value>1281072</value>
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
