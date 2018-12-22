@@ -35,6 +35,18 @@
         </description>
     </property>
 
+    <!-- hive on mr-->
+    <!--
+    <property>
+    <name>mapred.job.tracker</name>
+    <value>hdfs://192.168.99.50:9000</value>
+    </property>
+    <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+    </property>
+    -->
+
     <property>
         <name>hive.exec.reducers.bytes.per.reducer</name>
         <value>1000000000</value>
@@ -60,7 +72,7 @@
 
     <property>
         <name>hive.cli.print.current.db</name>
-        <value>false</value>
+        <value>true</value>
         <description>Whether to include the current database in the Hive prompt.</description>
     </property>
 
@@ -2566,7 +2578,7 @@
     </property>
     <property>
         <name>spark.eventLog.dir</name>
-        <value>hdfs://jianbing/spark-log</value>
+        <value>hdfs://jianbing/data/spark/log</value>
     </property>
     <property>
         <name>spark.serializer</name>
@@ -2578,7 +2590,7 @@
     </property>
     <property>
         <name>spark.driver.memeory</name>
-        <value>512m</value>
+        <value>1024m</value>
     </property>
     <property>
         <name>spark.executor.extraJavaOptions</name>

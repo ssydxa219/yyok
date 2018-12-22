@@ -64,3 +64,32 @@ FAILED: SemanticException Failed to get a spark session: org.apache.hadoop.hive.
 
 java.sql.SQLException: org.apache.hive.service.cli.HiveSQLException: Error while processing statement: FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.spark.SparkTask. Failed to create spark client.
 
+Spark开发性能调优
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

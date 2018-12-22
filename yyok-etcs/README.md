@@ -27,7 +27,7 @@ ssh-keygen -t rsa
 vim /etc/profile
 ---
 BASE_HOME=/ddhome/bin
-export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
+export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
 export JRE_HOME=$JAVA_HOME/jre
 export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
@@ -313,39 +313,36 @@ vim workers
 
 start-dfs.sh，stop-dfs.sh
 ---
-#!/usr/bin/env bash
+[root@master hadoop-3.0.1]# vi sbin/start-dfs.sh
+[root@master hadoop-3.0.1]# vi sbin/stop-dfs.sh
 HDFS_DATANODE_USER=root
- 
 HADOOP_SECURE_DN_USER=hdfs
- 
 HDFS_NAMENODE_USER=root
- 
 HDFS_SECONDARYNAMENODE_USER=root
- 
-HDFS_JOURNALNODE_USER=root
- 
-HDFS_ZKFC_USER=root
-
-start-yarn.sh，stop-yarn.sh
----
-#!/usr/bin/env bash
+[root@master hadoop-3.0.1]# vi sbin/start-yarn.sh
+[root@master hadoop-3.0.1]# vi sbin/stop-yarn.sh
 YARN_RESOURCEMANAGER_USER=root
- 
 HADOOP_SECURE_DN_USER=yarn
- 
 YARN_NODEMANAGER_USER=root
-
 
 scp -r 
 ---
 
 
 
-hdfs –initializeSharedEdits
-sbin/hadoop-daemon.sh start journalnode
+hdfs -initializeSharedEdits
+hdfs --daemon start journalnode
 hdfs namenode -format
 hdfs zkfc -formatZK
+hdfs --daemon start namenode
 start-dfs.sh
+hdfs namenode -bootstrapStandby
+hdfs --daemon start namenode
+
+mapred --daemon stop
+
+hdfs --daemon start journalnode
+
 
 param
 --

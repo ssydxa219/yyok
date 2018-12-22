@@ -19,7 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spark.version>2.4.0</spark.version>
         <scala.version>2.12.7</scala.version>
-        <scala.spark.version>2.12</scala.spark.version>
+        <scala.spark.version>2.11</scala.spark.version>
+        <hive.version>1.2.1</hive.version>
         <hadoop.version>3.1.1</hadoop.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -39,6 +40,12 @@
             <version>${mysql.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>fastutil</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>5.0.9</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -116,15 +123,6 @@
 
     </dependencies>
 
-    <repository>
-        <id>cdh.repo</id>
-        <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
-        <name>Cloudera Repositories</name>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -171,18 +169,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <!--<configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>-->
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>test-jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
                 <plugin>

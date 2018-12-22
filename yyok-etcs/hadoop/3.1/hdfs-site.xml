@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>dfs.nameservices</name>
-        <value>jianbing</value>
+        <value>jianbing_dev</value>
     </property>
     <property>
         <name>dfs.ha.automatic-failover.enabled.appcluster</name>

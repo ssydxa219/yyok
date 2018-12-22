@@ -26,3 +26,8 @@ set spark.serializer=org.apache.spark.serializer.KryoSerializer;
 
 
 
+hadoop fs  -mkdir  -p   /data/spark/log
+hadoop   fs  -chmod  777   /data/spark/log
+mkdir -p  /ddhome/bin/spark/{work,logs,run}
+mkdir -p /ddhome/bin/hive/logs
+

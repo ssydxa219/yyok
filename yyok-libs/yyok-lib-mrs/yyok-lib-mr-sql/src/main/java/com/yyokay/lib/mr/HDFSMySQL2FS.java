@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import mapr.EJob;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.Path;
@@ -99,11 +97,12 @@ import org.apache.hadoop.mapreduce.lib.db.DBWritable;
 
         @SuppressWarnings("deprecation")
         public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
-            File jarfile = EJob.createTempJar("bin");
+            /*File jarfile = EJob.createTempJar("bin");
             EJob.addClasspath("usr/hadoop/conf");
 
-            ClassLoader classLoader = EJob.getClassLoader();
-            Thread.currentThread().setContextClassLoader(classLoader);
+            ClassLoader classLoader = EJob.getClassLoader();*/
+            File jarfile = new File("");
+            //Thread.currentThread().setContextClassLoader(this.getClass());
 
             Configuration conf = new Configuration();
             // 这句话很关键

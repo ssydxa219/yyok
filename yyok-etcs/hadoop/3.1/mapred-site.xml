@@ -26,13 +26,13 @@
     <!-- 指定mapreduce jobhistory地址 -->
     <property>
         <name>mapreduce.jobhistory.address</name>
-        <value>ddx:10020</value>
+        <value>ddy:10020</value>
     </property>
 
     <!-- 任务历史服务器的web地址 -->
     <property>
         <name>mapreduce.jobhistory.webapp.address</name>
-        <value>ddx:19888</value>
+        <value>ddy:19888</value>
     </property>
 
     <property>

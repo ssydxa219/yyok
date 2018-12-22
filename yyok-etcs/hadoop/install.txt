@@ -6,3 +6,12 @@ mvn package -Pdist,native -DskipTests-Dtar-Dmaven.javadoc.skip=true
 
 mvn clean package -Pdist,native,docs -DskipTests -Dtar
 
+
+/ddhome/bin/hadoop/bin/hdfs --daemon start journalnode
+
+
+HDFS_NAMENODE_USER
+
+HDFS_DATANODE_USER
+
+HADOOP_PREFIX
