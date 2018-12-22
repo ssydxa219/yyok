@@ -16,6 +16,7 @@
 	<name>yyok-libs</name>
     <modules>
         <module>yyok-lib-mrs</module>
+        <module>yyok-lib-spiders</module>
     </modules>
     <packaging>pom</packaging>
 	<!-- FIXME change it to the project's website -->

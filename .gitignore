@@ -1,8 +1,9 @@
 # Built application files and Maven
-/target
-/_linux
-/_windows
-/codestyles
+target
+classes
+_linux
+_windows
+codestyles
 debugger.xml
 markdown.xml
 projectView.xml
@@ -31,11 +32,11 @@ github.xml
 *.log
 # About IntelliJ
 *.iml
-/.idea
-/.metadata
+.idea
+.metadata
 .gitignore
-/RemoteSystemsTempFiles
-/out
+RemoteSystemsTempFiles
+out
 # BlueJ files
 *.ctxt
 # Mobile Tools for Java (J2ME)
@@ -50,11 +51,11 @@ github.xml
 *.tar.gz
 *.rar
 # CMake
-cmake-build-debug/
+cmake-build-debug
 # File-based project format
 *.iws
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+.idea_modules
 # JIRA plugin atlassian-ide-plugin.xml
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -64,26 +65,26 @@ fabric.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 #from eclipse project configure
-/.settings/
-/test/
-test/
+.settings
+test
+test
 # built application files
 *.apk
 *.ap_
 # files for the dex VM
 *.dex
 # generated files
-bin/
-gen/
+bin
+gen
 # Eclipse project files
 .classpath
 .project
 
 # project files
-*/target
-/.idea
+target
+.idea
 .mvn
-.settings/
-*/log
-log/
-/site/
+.settings
+log
+logs
+site
