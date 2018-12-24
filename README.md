@@ -33,6 +33,7 @@
 开发工具:
 ----------------
    * JDK1.8 click the link ＆ down the [jdk-8u192-linux-x64.rpm](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) file and install（rpm -ivh jdk-8u192-linux-x64.rpm） default dir /usr/java/.
+   * SCALA2.11.0 click the link ＆ down the [scala-2.11.0.tgz](https://downloads.lightbend.com/scala/2.11.0/scala-2.11.0.tgz) file and instalL default dir /ddhome/bin/scala.
    * IntelliJ IDEA IDEA 2018 tar down [IntelliJ IDEA IDEA 2018 for linux](https://www.jetbrains.com/idea/download/download-thanks.html?platform=linux).
    * IntelliJ IDEA IDEA 2018 exe down [IntelliJ IDEA IDEA 2018 for windows](https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows).
    * IntelliJ IDEA [IntelliJ IDEA 2018 注册码](http://idea.lanyus.com/)
@@ -64,6 +65,23 @@
    * /sbin/sysctl -p
    * /root/.vimrc
 
+版本要求：
+----------------
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <scala.version>2.11.10</scala.version>
+        <spark.version>2.4.0</spark.version>
+        <spark.scala.version>2.11</spark.scala.version>
+        <hadoop.version>3.1.1</hadoop.version>
+        <hbase.version>2.1.1</hbase.version>
+        <hive.version>1.2.1</hive.version>
+        <kafka.version>2.1.0</kafka.version><!--kafka_2.11-2.1.0-->
+        <spring-kafka.version>2.1.5.RELEASE</spring-kafka.version>
+        <spring-data.version>2.1.3.RELEASE</spring-data.version>
+        <log4j.version>1.2.12</log4j.version>
+        <slf4j.version>1.7.25</slf4j.version>  
+        
 Using dev evn
 ----------------
 
