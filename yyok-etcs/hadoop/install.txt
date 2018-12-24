@@ -2,9 +2,13 @@ http://101.37.14.199:8188/cluster
 http://xuanwu.51gjj.com:50070
 http://101.37.14.63:50070
 
-mvn package -Pdist,native -DskipTests-Dtar-Dmaven.javadoc.skip=true
+mvn package -Pdist,native -DskipTests-Dtar-Dmaven.javadoc.skip=true  -Dskip.test=true
 
-mvn clean package -Pdist,native,docs -DskipTests -Dtar
+
+set MAVEN_OPTS="-Xms1024m  -Xmx1024m"
+
+mvn clean package -Pdist,native,docs -Dmaven.test.skip=true -Dtar
+
 
 
 /ddhome/bin/hadoop/bin/hdfs --daemon start journalnode

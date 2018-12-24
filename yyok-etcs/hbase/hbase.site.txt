@@ -2,7 +2,14 @@ http://101.37.14.199:60010
 http://118.31.173.146:16030/
 http://101.37.14.63:60010
 
-mvn -f pom.xml.hadoop3 install -DskipTests assembly:single -Prelease
+mvn -f pom.xml.hadoop3 install Dmaven.javadoc.skip=true -Dmaven.test.skip=true assembly:single -Prelease
+
+
+mvn clean install -Dmaven.javadoc.skip=true -Dmaven.test.skip=true assembly:single -Prelease
+
+
+mvn -Phadoop-3 -Pdist -DskipTests -Dmaven.javadoc.skip=true -Dskip.test=true -DskipTests clean package assembly:single -Prelease
+
 
 Table       (HBase table)
     Region       (Regions for the table)

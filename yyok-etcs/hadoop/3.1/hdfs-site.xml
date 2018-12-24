@@ -125,14 +125,14 @@
         <name>ha.failover-controller.cli-check.rpc-timeout.ms</name>
         <value>60000</value>
     </property>
-    <property>
+<!--    <property>
         <name>dfs.client.read.shortcircuit</name>
         <value>true</value>
     </property>
     <property>
         <name>dfs.domain.socket.path</name>
         <value>/ddhome/bin/hadoop/tmp/dn._PORT</value>
-    </property>
+    </property>-->
 
     <property>
         <name>dfs.client.file-block-storage-locations.timeout.millis</name>

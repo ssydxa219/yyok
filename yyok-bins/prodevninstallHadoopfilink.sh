@@ -14,7 +14,7 @@ hostname_config(){
     HostName=$(echo "ip"-$(ip addr|grep inet|grep brd|grep scope|awk '{print $2}'|awk -F '/' '{print $1}'|sed 's/\./-/g'))
     sed -i -e '/HOSTNAME/d' /etc/sysconfig/network
     echo "HOSTNAME=$HostName" >>/etc/sysconfig/network
-    echo "127.0.0.1 $HostName" >> /etc/hosts
+    #echo "127.0.0.1 $HostName" >> /etc/hosts
     hostname $HostName
     hostname
 }
