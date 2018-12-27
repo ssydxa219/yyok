@@ -6,7 +6,7 @@ mvn -f pom.xml.hadoop3 install Dmaven.javadoc.skip=true -Dmaven.test.skip=true a
 
 
 mvn clean install -Dmaven.javadoc.skip=true -Dmaven.test.skip=true assembly:single -Prelease
-
+mvn clean install -DskipTests assembly:single
 
 mvn -Phadoop-3 -Pdist -DskipTests -Dmaven.javadoc.skip=true -Dskip.test=true -DskipTests clean package assembly:single -Prelease
 

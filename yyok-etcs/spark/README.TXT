@@ -6,7 +6,8 @@ export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 
 mvn clean package -Pyarn -Phadoop-3.1.1 -Pspark-ganglia-lgpl -Pkinesis-asl -Phive -DskipTests
 
-mvn -Pyarn -Dyarn.version=2.9.10 -Phadoop-2.9 -Dhadoop.version=2.9.1 -DskipTests clean package
+mvn -Pyarn -Dyarn.version=2.9.2 -Phadoop-2.9 -Dhadoop.version=2.9.2 -DskipTests clean package
+
 
 1. 生成支持yarn 、hadoop3.1.1 、hive 的部署包：
 cd /ddhome/src/spark-2.4.0/dev

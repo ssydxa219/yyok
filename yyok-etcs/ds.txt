@@ -8,5 +8,21 @@ DW——数据仓库(data warehouse)
 DM——数据集市(data mart)
 
 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  41:04 min
+[INFO] Finished at: 2018-12-27T15:31:47+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project spark-hive_2.11: Could not resolve dependencies for project org.apache.spark:spark-hive_2.11:jar:2.2.0: The following artifacts could not be resolved: org.spark-project.hive:hive-exec:jar:2.3.4.spark2, org.spark-project.hive:hive-metastore:jar:2.3.4.spark2: Could not find artifact org.spark-project.hive:hive-exec:jar:2.3.4.spark2 in central (https://repo1.maven.org/maven2) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :spark-hive_2.11
 
 

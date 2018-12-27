@@ -343,6 +343,13 @@ mapred --daemon stop
 
 hdfs --daemon start journalnode
 
+hdfs haadmin -getServiceState nna
+hdfs haadmin -getServiceState nnb
+hdfs haadmin -transitionToActive --forcemanual nna
+hdfs haadmin -getServiceState nna
+hdfs haadmin -getServiceState nnb
+
+
 
 param
 --

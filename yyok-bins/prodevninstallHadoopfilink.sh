@@ -425,7 +425,7 @@ main(){
     #sed -i 's/LANG="en_US.UTF-8"/LANG="zh_CN.UTF-8"/' /etc/locale.conf
 #    hostname_config
 #    yum_config
-#    yum_tools
+    yum_tools
 #    firewalld_config
 #    system_config
 #    ulimit_config

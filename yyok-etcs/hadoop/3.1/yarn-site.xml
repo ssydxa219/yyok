@@ -15,7 +15,7 @@
 <configuration>
     <property>
         <name>yarn.resourcemanager.cluster-id</name>
-        <value>jianbing_dev</value>
+        <value>jianbing_yarn</value>
     </property>
     <property>
         <name>yarn.resourcemanager.connect.retry-interval.ms</name>
@@ -31,7 +31,7 @@
     </property>
     <property>
         <name>ha.zookeeper.quorum</name>
-        <value>ddx:2181,ddy:2181,ddz:2181</value>
+        <value>gaiaa:2181,gaiab:2181,gaiac:2181,gaiad:2181,gaiae:2181</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
@@ -39,11 +39,11 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname.rma</name>
-        <value>ddy</value>
+        <value>gaiac</value>
     </property>
     <property>
         <name>yarn.resourcemanager.hostname.rmb</name>
-        <value>ddz</value>
+        <value>gaiad</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.id</name>
@@ -55,7 +55,7 @@
     </property>
     <property>
         <name>yarn.resourcemanager.zk-state-store.address</name>
-        <value>ddx:2181,ddy:2181,ddz:2181</value>
+        <value>gaiaa:2181,gaiab:2181,gaiac:2181,gaiad:2181,gaiae:2181</value>
     </property>
     <property>
         <name>yarn.resourcemanager.store.class</name>
@@ -63,7 +63,7 @@
     </property>
     <property>
         <name>yarn.resourcemanager.zk-address</name>
-        <value>ddx:2181,ddy:2181,ddz:2181</value>
+        <value>gaiaa:2181,gaiab:2181,gaiac:2181,gaiad:2181,gaiae:2181</value>
     </property>
     <property>
         <name>yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms</name>
@@ -71,51 +71,51 @@
     </property>
     <property>
         <name>yarn.resourcemanager.address.rma</name>
-        <value>ddy:8032</value>
+        <value>gaiac:8032</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address.rma</name>
-        <value>ddy:8030</value>
+        <value>gaiac:8030</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address.rma</name>
-        <value>ddy:8088</value>
+        <value>gaiac:8088</value>
     </property>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address.rma</name>
-        <value>ddy:8031</value>
+        <value>gaiac:8031</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address.rma</name>
-        <value>ddy:8033</value>
+        <value>gaiac:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.admin.address.rma</name>
-        <value>ddy:8034</value>
+        <value>gaiac:8034</value>
     </property>
     <property>
         <name>yarn.resourcemanager.address.rmb</name>
-        <value>ddz:8032</value>
+        <value>gaiad:8032</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address.rmb</name>
-        <value>ddz:8030</value>
+        <value>gaiad:8030</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address.rmb</name>
-        <value>ddz:8188</value>
+        <value>gaiad:8088</value>
     </property>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address.rmb</name>
-        <value>ddz:8031</value>
+        <value>gaiad:8031</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address.rmb</name>
-        <value>ddz:8033</value>
+        <value>gaiad:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.ha.admin.address.rmb</name>
-        <value>ddz:8034</value>
+        <value>gaiad:8034</value>
     </property>
     <property>
         <name>yarn.nodemanager.aux-services</name>
@@ -127,11 +127,11 @@
     </property>
     <property>
         <name>yarn.nodemanager.local-dirs</name>
-        <value>/data/local/hadoop/yarn</value>
+        <value>/d4/local/hadoop/yarn</value>
     </property>
     <property>
         <name>yarn.nodemanager.log-dirs</name>
-        <value>/data/local/hadoop/log</value>
+        <value>/d1/local/hadoop/log</value>
     </property>
     <property>
         <name>mapreduce.shuffle.port</name>
@@ -143,7 +143,7 @@
     </property>
     <property>
         <name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
-        <value>/data/local/hadoop/yarn-leader-election</value>
+        <value>/d1/local/hadoop/yarn-leader-election</value>
         <description>Optional setting. The default value is /yarn-leader-election</description>
     </property>
     <property>
@@ -156,26 +156,18 @@
     </property>
     <!--它们表示单个容器可以申请的最小与最大内存。-->
     <property>
-        <description>The minimum allocation for every container request at the RM,
-            in MBs. Memory requests lower than this won‘t take effect,
-            and the specified value will get allocated at minimum.
-        </description>
         <name>yarn.scheduler.minimum-allocation-mb</name>
-        <value>2048</value>
+        <value>10000</value>
     </property>
     <property>
-        <description>The maximum allocation for every container request at the RM,
-            in MBs. Memory requests higher than this won‘t take effect,
-            and will get capped to this value.
-        </description>
         <name>yarn.scheduler.maximum-allocation-mb</name>
-        <value>8192</value>
+        <value>50000</value>
     </property>
 
 
     <property>
         <name>yarn.nodemanager.resource.cpu-vcores</name>
-        <value>8</value>
+        <value>4</value>
     </property>
 
     <!--前者表示单个节点可用的最大内存，RM中的两个值都不应该超过该值。后者表示虚拟内存率，即占task所用内存的百分比，默认为2.1.-->
@@ -203,12 +195,12 @@
 
     <property>
         <name>mapreduce.map.memory.mb</name>
-        <value>4096</value>
+        <value>50000</value>
     </property>
 
     <property>
         <name>mapreduce.reduce.memory.mb</name>
-        <value>4098</value>
+        <value>50000</value>
     </property>
 
     <property>

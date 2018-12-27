@@ -22,9 +22,9 @@ set spark.serializer=org.apache.spark.serializer.KryoSerializer;
 
 export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 
-mvn -Phadoop-3 -Pdist -Dskip.test=true  -DskipTests -Dmaven.javadoc.skip=true clean package
+mvn -Phadoop-2,dist -Dskip.test=true  -DskipTests -Dmaven.javadoc.skip=true clean package
 
-
+mvn clean package -Phadoop-2,dist -DskipTests -Dtar
 
 
         hive --service metastore 1>/dev/null 2>&1 &

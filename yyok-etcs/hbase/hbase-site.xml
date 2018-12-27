@@ -8,16 +8,16 @@
 </property>
 <property>
 	<name>hbase.zookeeper.quorum</name>
-	<value>dda,ddb,ddc,dde,ddf</value>
+	<value>gaiaa,gaiab,gaiac,gaiad,gaiae</value>
 </property>
 <property>
 	<name>hbase.tmp.dir</name>
-	<value>/ddhome/bin/hbase/tmp</value>
+	<value>/d1/bin/hbase/tmp</value>
 </property>
 
 <property>
 	<name>hbase.zookeeper.property.dataDir</name>
-	<value>/data/local/zookeeper/data</value>
+	<value>/d1/local/zookeeper/data</value>
 </property>
 <property>
 	<name>hbase.master.info.port</name>
@@ -33,6 +33,6 @@
 </property>
 <property>
 	<name>dfs.replication</name>
-	<value>2</value>
+	<value>3</value>
 </property>
 
