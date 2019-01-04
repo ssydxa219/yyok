@@ -6,7 +6,10 @@
 
 yum install -y libaio
 
-bin/mysql_install_db --user=mysql --basedir=/d1/bin/mysql/ --datadir=/d1/local/mysql/data/
+bin/mysql_install_db --user=mysql --basedir=/d1/bin/mysql --datadir=/d1/bin/mysql/data
+
+
+mysqld --initialize --user=mysql  --basedir=/d1/bin/mysql/ --datadir=/d1/bin/mysql/data/
 
 修改/support-files/mysql.server文件的basedir和datadir目录路径为我们环境所在的mysql的basedir和datadir路径，指定pid位置
 
@@ -68,16 +71,20 @@ socket = /mydata/mysql-5.7/mysql.sock
 [root@ mysql]# chkconfig --list mysqld
 [root@ mysql]# service mysqld status
 
-export PATH=$PATH:/var/mysql/bin
+export PATH=$PATH:/d1/bin/mysql/bin
 
-[root@hdp265dnsnfs mysql57]# source /etc/profile
-cat /root/.mysql_secret
+[root@mysql]# source /etc/profile
+[root@mysql]# cat /root/.mysql_secret
 
 mysql -uroot -p
 set PASSWORD = PASSWORD('666666');
 flush privileges;
 
 ln -s   /usr/local/mysql/bin/mysql   /usr/bin/mysql
+
+jdbc:mysql://192.168.150.1:3306/hive_metadata?createDatabaseIfNotExsit=true&amp;characterEncoding=UTF-8
+
+
 
 
 

@@ -7,6 +7,10 @@
 	<value>true</value>
 </property>
 <property>
+	<name>hbase.snapshot.enabled</name>
+	<value>true</value>
+</property>
+<property>
 	<name>hbase.zookeeper.quorum</name>
 	<value>gaiaa,gaiab,gaiac,gaiad,gaiae</value>
 </property>

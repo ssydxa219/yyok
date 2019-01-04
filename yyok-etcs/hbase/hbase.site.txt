@@ -21,7 +21,7 @@ Table       (HBase table)
                     
 create "ods:users","info","relation", {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit', CONFIGURATION => {'hbase.hregion.scan.loadColumnFamiliesOnDemand' => 'true'}}
 
-create "ods:behavior","info","relation", {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit', CONFIGURATION => {'hbase.hregion.scan.loadColumnFamiliesOnDemand' => 'true'}}
+create "behavior:phonelog","info","relation", {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit', CONFIGURATION => {'hbase.hregion.scan.loadColumnFamiliesOnDemand' => 'true'}}
 
 Create a table with namespace=ns1 and table qualifier=t1  
   hbase> create 'ns1:t1', {NAME => 'f1', VERSIONS => 5}  

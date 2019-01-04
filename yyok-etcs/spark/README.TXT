@@ -1,6 +1,6 @@
 sbt assembly -Pyarn -Phadoop-3.1.1 -Pspark-ganglia-lgpl -Pkinesis-asl -Phive
 
-./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-3.1.1  -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+./dev/make-distribution.sh --name spark --pip --r --tgz -Psparkr -Phadoop-2.9.2  -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
 
 export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 
@@ -18,7 +18,7 @@ cd /ddhome/src/spark-2.4.0/dev
 
 ./make-distribution.sh --tgz --name 2.4.0 -Pyarn -Phadoop-3.1.1 -Pspark-ganglia-lgpl -P hive
 
-
+./dev/make-distribution.sh --name hadoop2.9.2 --tgz -Phadoop-2.9 -Phive -Phive-thriftserver -Pyarn
 
 spark-shell --master spark://101.37.14.199:7077 --executor-memory 500m
 spark-shell --master spark://101.37.14.199:7077 --executor-memory 512m --driver-memory 512m
