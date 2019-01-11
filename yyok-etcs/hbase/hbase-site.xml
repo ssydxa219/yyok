@@ -15,10 +15,27 @@
 	<value>gaiaa,gaiab,gaiac,gaiad,gaiae</value>
 </property>
 <property>
+	<name>hbase.regionserver.lease.period</name>
+	<value>180000</value>
+</property>
+
+
+<property>
 	<name>hbase.tmp.dir</name>
 	<value>/d1/bin/hbase/tmp</value>
 </property>
-
+<property>
+	<name>hbase.hregion.max.filesize</name>
+	<value>10737418240</value>
+</property>
+<property>
+	<name>hbase.mapreduce.bulkload.max.hfiles.perRegion.perFamily</name>
+	<value>3200</value>
+</property>
+<property>
+	<name>hbase.coprocessor.region.classes</name>
+	<value>org.myname.hbase.coprocessor.endpoint.SumEndPoint</value>
+</property>
 <property>
 	<name>hbase.zookeeper.property.dataDir</name>
 	<value>/d1/local/zookeeper/data</value>
@@ -39,4 +56,40 @@
 	<name>dfs.replication</name>
 	<value>3</value>
 </property>
+<property>
+	<name>hbase.client.write.buffer</name>
+	<value>100971520</value>
+</property>
+<property>
+	<name>hbase.client.scanner.caching</name>
+	<value>100</value>
+</property>
+<property>
+	<name>hbase.regionserver.handler.count</name>
+	<value>1000</value>
+</property>
+<property>
+	<name>perf.hfile.block.cache.size</name>
+	<value>60%</value>
+</property>
+<property>
+	<name>hbase.regionserver.global.memstore.lowerLimt</name>
+	<value>0.35</value>
+</property>
+<property>
+	<name>hbase.regionserver.global.memstore.upperLimt</name>
+	<value>0.4</value>
+</property>
+<property>
+	<name>hbase.hstore.blockingStoreFiles</name>
+	<value>100</value>
+</property>
+<property>
+	<name>hbase.regionserver.maxlogs</name>
+	<value>16</value>
+</property>
 
+<property>
+	<name>zookeeper.session.timeout</name>
+	<value>120000</value>
+</property>

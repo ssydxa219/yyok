@@ -1,3 +1,44 @@
 export JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
 export HBASE_LOG_DIR=/data/local/hbase/log
 export HBASE_CONF_DIR=/ddhome/bin/hbase/conf
+
+export HBASE_REGIONSERVER_OPTS="$HBASE_REGIONSERVER_OPTS $HBASE_JMX_BASE -Xmx6000m -Xms6000m -Xmn2250m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=70 -Xloggc:/d1/local/hbase/logs/gc.log"
+
+
+优化配置
+1. zookeeper.session.timeout
+regionserver在zookeeper的会话过期时间，默认是3分钟，如果regionserver 在zookeeper.session.timeout这个配置的时间没有去连zookeeper的话，zookeeper会将该regionserver在zookeeper摘除，该regionserver停止服务，很多情况下该值设置很大，原因是生产环境中regionserver的内存都配置很大，以扩大memstore和cache的大小，提高性能，但是内存配置大了，regionserver在jvm做一次内存大回收时，时间也会变长，很有可能这个时间超过zookeeper.session.timeout时间，导致regionserver在jvm回收内存的时候，zookeeper误以为regionserver挂掉而将regionserver摘除。该值还是不要配的过大，首先地java已支持cms方式回收内存，每次内存回收的时间不是太长，并且生产环境中，不允许过长时间的服务中断，配置大了，容易造成一个regionserver的服务真出现异常时，zookeeper不会切除该regionserver，使得很多请求失败
+
+2. hbase.regionserver.handler.count
+RegionServer端开启的RPC监听器实例个数，也即RegionServer能够处理的IO请求线程数。默认是10.
+此参数与内存息息相关。该值设置的时候，以监控内存为主要参考。对于单次请求内存消耗较高的Big PUT场景（大容量单次PUT或设置了较大cache的scan，均属于Big PUT）或ReigonServer的内存比较紧张的场景，可以设置的相对较小。对于单次请求内存消耗低，TPS（TransactionPerSecond，每秒事务处理量）要求非常高的场景，可以设置的相对大些.通常都调到100~200之间，提高regionserver性能
+
+3. hbase.regionserver.lease.period
+regionserer租约时间，默认值是60s，如果生产环境中，在执行一些任务时，如mapred时出现lease超时的报错，那这个时候就需要去调大这个值了
+
+4. file.block.cache.size
+regionserver cache的大小，默认是0.2，是整个堆内存的多少比例作为regionserver的cache，调大该值会提升查询性能，当然也不能过大，如果你的hbase都大量的查询，写入不是很多的话，调到0.5也就够了，说到这个值，有一个地方需要说明一下，如果生产环境有mapred任务去scan hbase的时候，一些要在mapred scan类中加一个scan.setCacheBlocks(false)，避免由于mapred使用regionserver的cache都被替换，造成hbase的查询性能明显下降
+
+5. hbase.hregion.max.filesize 默认值是256M
+当HStoreFile的值超过这个值，就会引发HRegion的split。HBase中数据一开始会写入memstore，当memstore达到一定阈值后，会flush到disk上而成为storefile。当storefile数量超过3时，会启动compaction过程将它们合并为一个storefile。这个过程中会删除一些timestamp过期的数据，比如update的数据。而当合并后的storefile大小大于hfile默认最大值时，会触发split动作，将它切分成两个region。持续的insert压力测试得出：值越小，平均吞吐量越大，但吞吐量越不稳定；值越大，平均吞吐量越小，吞吐量不稳定的时间相对更小。
+当hbase.hregion.max.filesize比较小时，触发split的机率更大，而split的时候会将region offline，因此在split结束的时间前，访问该region的请求将被block住，客户端自我block的时间默认为1s。当大量的region同时发生split时，系统的整体访问服务将大受影响。因此容易出现吞吐量及响应时间的不稳定现象
+当hbase.hregion.max.filesize比较大时，单个region中触发split的机率较小，大量region同时触发split的机率也较小，因此吞吐量较之小hfile尺寸更加稳定些。但是由于长期得不到split，因此同一个region内发生多次compaction的机会增加了。compaction的原理是将原有数据读一遍并重写一遍到hdfs上，然后再删除原有数据。无疑这种行为会降低以io为瓶颈的系统的速度，因此平均吞吐量会受到一些影响而下降
+综合以上两种情况，hbase.hregion.max.filesize不宜过大或过小，256MB或许是一个更理想的经验参数。对于离线型的应用，调整为128MB会更加合适。配置这个值，需要参考一下，平均每个regionserver管理的region数量，如果每台regionsever管理的region不多的话，可以适当的调大该值，如512M时再flush，而在线应用除非对split机制进行改造，否则不应该低于256MB
+
+6. hbase.regionserver.global.memstore.upperLimit/hbase.regionserver.global.memstore.lowerLimit
+配置一台regionserver所有memstore占整个堆的最大比例，默认是0.4/0.35，二个值的差异在于是做局部的flush，还是全部flush，如果你的regionserver日志中，频发出现因为超过hbase.regionserver.global.memstore.lowerLimit而做flush的信息，我觉得有必要调小hbase.hregion.memstore.flush.size，或者适当调大这二个值，当然hbase.regionserver.global.memstore.upperLimit和hfile.block.cache.size的和不能大于1，到0.8我觉得已经够大了。如果你的jvm内存回收是使用cms的话，有一个值CMSInitiatingOccupancyFraction（内存使用到时多少时，一始cms回收内存）的大小和觉得和这个有关系，略小于hbase.regionserver.global.memstore.upperLimit和hfile.block.cache.size的和是一个不错的选择。
+
+7. hbase.hstore.compactionThreshold/hbase.hregion.majorcompaction
+hbase.hstore.compactionThreshold执行compaction的store数量，默认值是3，如果需要提高查询性能，当然是storefile的数量越小，性能越好，但是执行compaction本身有性能资源的开消，如果regionserver频繁在compacion对性能影响也很大。hbase.hregion.majorcompaction表示majorcompaction的周期，默认是1天，majorcompaction与普通的compaction的区别是majorcompaction会清除过期的历史版本数据，同时合并storefile，而普通的compaction只做合并，通常都是majorcompaction，调为0，然后手工定期的去执行一下majorcompaction，适当调小点compacionThreshold。
+
+8. hbase.regionserver.hlog.blocksize/hbase.regionserver.maxlogs
+当数据被写入时会默认先写入Write-ahead Log(WAL)。WAL中包含了所有已经写入Memstore但还未Flush到HFile的更改(edits)。在Memstore中数据还没有持久化，当RegionSever宕掉的时候，可以使用WAL恢复数据。
+当WAL(在HBase中成为HLog)变得很大的时候，在恢复的时候就需要很长的时间。因此，对WAL的大小也有一些限制，当达到这些限制的时候，就会触发Memstore的flush。Memstore flush会使WAL 减少，因为数据持久化之后(写入到HFile)，就没有必要在WAL中再保存这些修改。有两个属性可以配置：
+你可能已经发现，WAL的最大值由hbase.regionserver.maxlogs * hbase.regionserver.hlog.blocksize (2GB by default)决定。一旦达到这个值，Memstore flush就会被触发。所以，当你增加Memstore的大小以及调整其他的Memstore的设置项时，你也需要去调整HLog的配置项。否则，WAL的大小限制可能会首先被触发，因而，你将利用不到其他专门为Memstore而设计的优化。抛开这些不说，通过WAL限制来触发Memstore的flush并非最佳方式，这样做可能会会一次flush很多Region，尽管“写数据”是很好的分布于整个集群，进而很有可能会引发flush“大风暴”。最好将hbase.regionserver.hlog.blocksize * hbase.regionserver.maxlogs 设置为稍微大于hbase.regionserver.global.memstore.lowerLimit * HBASE_HEAPSIZE.
+
+对Memstore Flush来说，主要有两组配置项：决定Flush触发时机,决定Flush何时触发并且在Flush时候更新被阻断(block)
+9. hbase.hregion.memstore.flush.size/hbase.regionserver.global.memstore.lowerLimit
+关于触发“普通”flush，这类flush发生时，并不影响并行的写请求。需要注意的是第一个设置是每个Memstore的大小，当你设置该配置项时，你需要考虑一下每台RS承载的region总量。可能一开始你设置的该值比较小，后来随着region增多，那么就有可能因为第二个设置原因Memstore的flush触发会变早许多.
+
+10.hbase.hregion.memstore.block.multiplier/hbase.regionserver.global.memstore.upperLimit
+有时候集群的“写负载”非常高，写入量一直超过flush的量，这时，我们就希望memstore不要超过一定的安全设置。在这种情况下，写操作就要被阻止(blocked)一直到memstore恢复到一个“可管理”(manageable)的大小。某个节点“写阻塞”对该节点来说影响很大，但是对于整个集群的影响更大。HBase设计为：每个Region仅属于一个RS但是“写负载”是均匀分布于整个集群(所有Region上)。有一个如此“慢”的节点，将会使得整个集群都会变慢(最明显的是反映在速度上)。密切关注Memstore的大小和Memstore Flush Queue的大小。理想情况下，Memstore的大小不应该达到hbase.regionserver.global.memstore.upperLimit的设置，Memstore Flush Queue 的size不能持续增长
