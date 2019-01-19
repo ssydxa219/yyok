@@ -6,6 +6,149 @@ export HBASE_REGIONSERVER_OPTS="$HBASE_REGIONSERVER_OPTS $HBASE_JMX_BASE -Xmx600
 
 
 优化配置
+
+ 1.垃圾回收优化
+
+Java本身提供了垃圾回收机制，依靠JRE对程序行为的各种假设进行垃圾回收，但是HBase支持海量数据持续入库，非常占用内存，因此繁重的负载会迫使内存分配策略无法安全地依赖于JRE的判断：需要调整JRE的参数来调整垃圾回收策略。有关java内存回收机制的问题具体请参考：http://my.oschina.net/sunnywu/blog/332870。
+
+（1）HBASE_OPTS或者HBASE_REGIONSERVER_OPT变量来设置垃圾回收的选项，后面一般是用于配置RegionServer的，需要在每个子节点的HBASE_OPTS文件中进行配置。
+
+1）首先是设置新生代大小的参数，不能过小，过小则导致年轻代过快成为老生代，引起老生代产生内存随便。同样不能过大，过大导致所有的JAVA进程停止时间长。-XX:MaxNewSize=256m-XX:NewSize=256m 这两个可以合并成为-Xmn256m这一个配置来完成。
+
+2）其次是设置垃圾回收策略：-XX:+UseParNewGC -XX:+UseConcMarkSweepGC也叫收集器设置。
+
+3）设置CMS的值，占比多少时，开始并发标记和清扫检查。-XX:CMSInitiatingOccupancyFraction=70
+
+4）打印垃圾回收信息：-verbose:gc -XX: +PrintGCDetails -XX:+PrintGCTimeStamps
+
+-Xloggc:$HBASE_HOME/logs/gc-$(hostname)-hbase.log
+
+最终可以得到：HBASE_REGIONSERVER_OPT="-Xmx8g -Xms8g –Xmn256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC  \
+
+-XX:CMSInitiatingOccupancyFraction=70   -verbose:gc \
+
+-XX:+PrintGCDetails -XX:+PrintGCTimeStamps \
+
+-Xloggc:$HBASE_HOME/logs/gc-$(hostname)-hbase.log
+
+（2）hbase.hregion.memstore.mslab.enabled默认值：true，这个是在hbase-site.xml中进行配置的值。
+
+说明：减少因内存碎片导致的Full GC，提高整体性能。
+
+2.启用压缩，详情自行搜索，暂时未曾尝试，后面持续更新。
+
+3.优化Region拆分合并以及与拆分Region
+
+（1）hbase.hregion.max.filesize默认为256M（在hbase-site.xml中进行配置），当region达到这个阈值时，会自动拆分。可以把这个值设的无限大，则可以关闭HBase自动管理拆分，手动运行命令来进行region拆分，这样可以在不同的region上交错运行，分散I/O负载。
+
+（2）预拆分region
+
+用户可以在建表的时候就制定好预设定的region，这样就可以避免后期region自动拆分造成I/O负载。
+
+4.客户端入库调优
+
+（1）用户在编写程序入库时，HBase的自动刷写是默认开启的，即用户每一次put都会提交到HBase server进行一次刷写，如果需要高速插入数据，则会造成I/O负载过重。在这里可以关闭自动刷写功能，setAutoFlush(false)。如此，put实例会先写到一个缓存中，这个缓存的大小通过hbase.client.write.buffer这个值来设定缓存区，当缓存区被填满之后才会被送出。如果想要显示刷写数据，可以调用flushCommits()方法。
+
+此处引申：采取这个方法要估算服务器端内存占用则可以：hbase.client.write.buffer*hbase.regionserver.handler.count得出内存情况。
+
+（2）第二个方法，是关闭每次put上的WAL（writeToWAL(flase)）这样可以刷写数据前，不需要预写日志，但是如果数据重要的话建议不要关闭。
+
+（3）hbase.client.scanner.caching：默认为1
+
+这是设计客户端读取数据的配置调优，在hbase-site.xml中进行配置，代表scanner一次缓存多少数据（从服务器一次抓取多少数据来scan）默认的太小，但是对于大文件，值不应太大。
+
+（4）hbase.regionserver.lease.period默认值：60000
+
+说明：客户端租用HRegion server 期限，即超时阀值。
+
+调优：这个配合hbase.client.scanner.caching使用，如果内存够大，但是取出较多数据后计算过程较长，可能超过这个阈值，适当可设置较长的响应时间以防被认为宕机。
+
+（5）还有诸多实践，如设置过滤器，扫描缓存等，指定行扫描等多种客户端调优方案，需要在实践中慢慢挖掘。
+
+5.HBase配置文件
+
+上面涉及到的调优内容或多或少在HBase配置文件中都有所涉及，因此，下面的配置不涵盖上面已有的配置。
+
+(1) zookeeper.session.timeout（默认3分钟）
+
+ZK的超期参数，默认配置为3分钟，在生产环境上建议减小这个值在1分钟或更小。
+
+设置原则：这个值越小，当RS故障时Hmaster获知越快，Hlog分裂和region 部署越快，集群恢复时间越短。 但是，设置这个值得原则是留足够的时间进行GC回收，否则会导致频繁的RS宕机。一般就做默认即可
+
+（2）hbase.regionserver.handler.count（默认10）
+
+对于大负载的put（达到了M范围）或是大范围的Scan操作，handler数目不易过大，易造成OOM。 对于小负载的put或是get，delete等操作，handler数要适当调大。根据上面的原则，要看我们的业务的情况来设置。（具体情况具体分析）。
+
+（3）HBASE_HEAPSIZE（hbase-env.sh中配置）
+
+我的前两篇文章Memstoresize40%（默认） blockcache 20%（默认）就是依据这个而成的，总体HBase内存配置。设到机器内存的1/2即可。
+
+（4）选择使用压缩算法，目前HBase默认支持的压缩算法包括GZ，LZO以及snappy（hbase-site.xml中配置）
+
+（5）hbase.hregion.max.filesize默认256M
+
+上面说过了，hbase自动拆分region的阈值，可以设大或者无限大，无限大需要手动拆分region，懒的人别这样。
+
+（6）hbase.hregion.memstore.flush.size
+
+单个region内所有的memstore大小总和超过指定值时，flush该region的所有memstore。
+
+（7）hbase.hstore.blockingStoreFiles  默认值：7
+
+说明：在flush时，当一个region中的Store（CoulmnFamily）内有超过7个storefile时，则block所有的写请求进行compaction，以减少storefile数量。
+
+调优：block写请求会严重影响当前regionServer的响应时间，但过多的storefile也会影响读性能。从实际应用来看，为了获取较平滑的响应时间，可将值设为无限大。如果能容忍响应时间出现较大的波峰波谷，那么默认或根据自身场景调整即可。
+
+（8）hbase.hregion.memstore.block.multiplier默认值：2
+
+说明：当一个region里总的memstore占用内存大小超过hbase.hregion.memstore.flush.size两倍的大小时，block该region的所有请求，进行flush，释放内存。
+
+虽然我们设置了region所占用的memstores总内存大小，比如64M，但想象一下，在最后63.9M的时候，我Put了一个200M的数据，此时memstore的大小会瞬间暴涨到超过预期的hbase.hregion.memstore.flush.size的几倍。这个参数的作用是当memstore的大小增至超过hbase.hregion.memstore.flush.size 2倍时，block所有请求，遏制风险进一步扩大。
+
+调优： 这个参数的默认值还是比较靠谱的。如果你预估你的正常应用场景（不包括异常）不会出现突发写或写的量可控，那么保持默认值即可。如果正常情况下，你的写请求量就会经常暴长到正常的几倍，那么你应该调大这个倍数并调整其他参数值，比如hfile.block.cache.size和hbase.regionserver.global.memstore.upperLimit/lowerLimit，以预留更多内存，防止HBase server OOM。
+
+（9）hbase.regionserver.global.memstore.upperLimit：默认40%
+
+当ReigonServer内所有region的memstores所占用内存总和达到heap的40%时，HBase会强制block所有的更新并flush这些region以释放所有memstore占用的内存。
+
+hbase.regionserver.global.memstore.lowerLimit：默认35%
+
+同upperLimit，只不过lowerLimit在所有region的memstores所占用内存达到Heap的35%时，不flush所有的memstore。它会找一个memstore内存占用最大的region，做个别flush，此时写更新还是会被block。lowerLimit算是一个在所有region强制flush导致性能降低前的补救措施。在日志中，表现为 “** Flushthread woke up with memory above low water.”。
+
+调优：这是一个Heap内存保护参数，默认值已经能适用大多数场景。
+
+（10）hfile.block.cache.size：默认20%
+
+  这是涉及hbase读取文件的主要配置，BlockCache主要提供给读使用。读请求先到memstore中查数据，查不到就到blockcache中查，再查不到就会到磁盘上读，并把读的结果放入blockcache。由于blockcache是一个LRU,因此blockcache达到上限(heapsize * hfile.block.cache.size)后，会启动淘汰机制，淘汰掉最老的一批数据。对于注重读响应时间的系统，应该将blockcache设大些，比如设置blockcache=0.4，memstore=0.39，这会加大缓存命中率。
+
+（11）hbase.regionserver.hlog.blocksize和hbase.regionserver.maxlogs
+
+之所以把这两个值放在一起，是因为WAL的最大值由hbase.regionserver.maxlogs*hbase.regionserver.hlog.blocksize (2GB by default)决定。一旦达到这个值，Memstore flush就会被触发。所以，当你增加Memstore的大小以及调整其他的Memstore的设置项时，你也需要去调整HLog的配置项。否则，WAL的大小限制可能会首先被触发，因而，你将利用不到其他专门为Memstore而设计的优化。抛开这些不说，通过WAL限制来触发Memstore的flush并非最佳方式，这样做可能会会一次flush很多Region，尽管“写数据”是很好的分布于整个集群，进而很有可能会引发flush“大风暴”。
+
+提示：最好将hbase.regionserver.hlog.blocksize* hbase.regionserver.maxlogs 设置为稍微大于hbase.regionserver.global.memstore.lowerLimit* HBASE_HEAPSIZE。
+
+6.HDFS优化部分
+
+HBase是基于hdfs文件系统的一个数据库，其数据最终是写到hdfs中的，因此涉及hdfs调优的部分也是必不可少的。
+
+（1）dfs.replication.interval:默认3秒
+
+可以调高，避免hdfs频繁备份，从而提高吞吐率。
+
+（2）dfs.datanode.handler.count:默认为10
+
+可以调高这个处理线程数，使得写数据更快
+
+（3）dfs.namenode.handler.count：默认为8
+
+（4）dfs.datanode.socket.write.timeout：默认480秒，并发写数据量大的时候可以调高一些，否则会出现我另外一篇博客介绍的的错误。
+
+（5）dfs.socket.timeout:最好也要调高，默认的很小。
+
+同上，可以调高，提高整体速度与性能。
+
+
+
 1. zookeeper.session.timeout
 regionserver在zookeeper的会话过期时间，默认是3分钟，如果regionserver 在zookeeper.session.timeout这个配置的时间没有去连zookeeper的话，zookeeper会将该regionserver在zookeeper摘除，该regionserver停止服务，很多情况下该值设置很大，原因是生产环境中regionserver的内存都配置很大，以扩大memstore和cache的大小，提高性能，但是内存配置大了，regionserver在jvm做一次内存大回收时，时间也会变长，很有可能这个时间超过zookeeper.session.timeout时间，导致regionserver在jvm回收内存的时候，zookeeper误以为regionserver挂掉而将regionserver摘除。该值还是不要配的过大，首先地java已支持cms方式回收内存，每次内存回收的时间不是太长，并且生产环境中，不允许过长时间的服务中断，配置大了，容易造成一个regionserver的服务真出现异常时，zookeeper不会切除该regionserver，使得很多请求失败
 
