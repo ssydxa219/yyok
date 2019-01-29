@@ -114,6 +114,7 @@ done
 function main(){
 tables
 tablecount
+backupAllTables
 compareFile
 compareContext
 backupIncrementTables
