@@ -16,10 +16,12 @@ EXE_MYSQL="mysql -h${HOST} -u${USER} -p${PASSWORD} --default-character-set=utf8 
 #all
 # and table_name in (${pointTables})
 function tables(){
-mysql -u${USER} -p${PASSWORD} -P${PORT} -h${HOST} -D${DATABASE} >${EXPORT_PATH}/tables.txt << EOF
+mysql -u${USER} -p${PASSWORD} -P${PORT} -h${HOST} -D${DATABASE} >${EXPORT_PATH}/tabless.txt << EOF
     select table_name from information_schema.tables where table_schema="${DATABASE}" 
     # and table_name in (${pointTables})
 EOF
+sed -e '/table_name/d' ${EXPORT_PATH}/tabless.txt >${EXPORT_PATH}/tables.txt
+rm -rf ${EXPORT_PATH}/tabless.txt
 }
 
 #
@@ -39,16 +41,23 @@ for line in $(cat ${EXPORT_PATH}/${lasttimefile});do
 array=(${line//:/ })
 tablename=${array[0]}
 tablecount=${array[1]}
-#echo $tablename  :  $tablecount
-mkdir -p ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}
-looptimes=$(expr ($tablecount/$EXPORTNUM) +1)
-for((i=0;i<=${looptimes};i++));  
-do
-currentnum=$(expr $i \* $EXPORTNUM)
-sql="select * from ${DATABASE}.${tablename} limit  ${currentnum}, ${EXPORTNUM}"
-result="$($EXE_MYSQL -e "${sql}")"
-echo  "${line}:${result}" >>${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}/${tablename}.txt
-done
+imported=`ls -l ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP} |awk '{print $9}'`
+result=$(echo $imported | grep "${tablename}")
+        if [[ "$result" != "" ]]
+            then
+               # echo $tablename no inc
+                mkdir -p ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}
+                looptimes=$(expr $tablecount/$EXPORTNUM)+1
+                for((i=0;i<=${looptimes};i++));  
+                do
+                currentnum=$(expr $i \* $EXPORTNUM)
+                sql="select * from ${DATABASE}.${tablename} limit  ${currentnum}, ${EXPORTNUM}"
+                result="$($EXE_MYSQL -e "${sql}")"
+                echo  "${line}:${result}" >>${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}/${tablename}.txt
+                done
+                else
+                echo inc $tablename no import
+         fi
 done
 }
 
@@ -91,6 +100,7 @@ done
 echo -e "$tables_incrementstr" >${EXPORT_PATH}/tables_increment.txt
 }
 
+
 #incremant table export
 function backupIncrementTables(){
 mkdir -p ${EXPORT_PATH}/${DATABASE}/incr
@@ -109,13 +119,13 @@ fi
 done
 }
 
-#first :tables tablecount backupAllTables; times:backupAllTables  compareFile compareContext backupIncrementTables
+#
 function main(){
 tables
 tablecount
 backupAllTables
-compareFile
-compareContext
-backupIncrementTables
+#compareFile
+#compareContext
+#backupIncrementTables
 }
 main
