@@ -17,8 +17,7 @@ EXE_MYSQL="mysql -h${HOST} -u${USER} -p${PASSWORD} --default-character-set=utf8 
 # and table_name in (${pointTables})
 function tables(){
 mysql -u${USER} -p${PASSWORD} -P${PORT} -h${HOST} -D${DATABASE} >${EXPORT_PATH}/tabless.txt << EOF
-    select table_name from information_schema.tables where table_schema="${DATABASE}" 
-    # and table_name in (${pointTables})
+    select table_name from information_schema.tables where table_schema="${DATABASE}" #and table_name in (${pointTables})
 EOF
 sed -e '/table_name/d' ${EXPORT_PATH}/tabless.txt >${EXPORT_PATH}/tables.txt
 rm -rf ${EXPORT_PATH}/tabless.txt
@@ -36,28 +35,43 @@ done
 #all tables bakup
 function backupAllTables(){
 lasttimefile=`ls -l $EXPORT_PATH | grep tablescount | tail -n 1 | awk '{print $9}'`
+TIMESTAMPa=${lasttimefile#*tablescount_}
+TIMESTAMP=${TIMESTAMPa%%.txt*}
 #echo 'the file name : ' $lasttimefile
+mkdir -p ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}
 for line in $(cat ${EXPORT_PATH}/${lasttimefile});do
 array=(${line//:/ })
 tablename=${array[0]}
 tablecount=${array[1]}
 imported=`ls -l ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP} |awk '{print $9}'`
-result=$(echo $imported | grep "${tablename}")
-        if [[ "$result" != "" ]]
-            then
-               # echo $tablename no inc
-                mkdir -p ${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}
-                looptimes=$(expr $tablecount/$EXPORTNUM)+1
+looptimes=$(expr $tablecount/$EXPORTNUM)+1
+
+if [ "$imported"=="" ];then
                 for((i=0;i<=${looptimes};i++));  
                 do
                 currentnum=$(expr $i \* $EXPORTNUM)
                 sql="select * from ${DATABASE}.${tablename} limit  ${currentnum}, ${EXPORTNUM}"
                 result="$($EXE_MYSQL -e "${sql}")"
-                echo  "${line}:${result}" >>${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}/${tablename}.txt
+                echo "${result}" >>${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}/${tablename}.txt
+                done
+
+else
+result=$(echo $imported | grep "${tablename}")
+        if [[ "$result" != "" ]]
+            then
+               # echo $tablename no inc
+               #echo $tablename  :  $tablecount
+                for((i=0;i<=${looptimes};i++));  
+                do
+                currentnum=$(expr $i \* $EXPORTNUM)
+                sql="select * from ${DATABASE}.${tablename} limit  ${currentnum}, ${EXPORTNUM}"
+                result="$($EXE_MYSQL -e "${sql}")"
+                echo  "${result}" >${EXPORT_PATH}/${DATABASE}/${TIMESTAMP}/${tablename}.txt
                 done
                 else
-                echo inc $tablename no import
+                echo inc $tablename
          fi
+fi
 done
 }
 
