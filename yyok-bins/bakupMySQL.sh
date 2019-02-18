@@ -10,14 +10,16 @@ EXPORT_PATH=/data/exp #导出目录
 LOG_PATH=/data/exp/data.log #日志
 EXPORTNUM=500000 #导出条数
 mkdir -p $EXPORT_PATH
+#备份所有指定表
 pointTables="'cfg_app_main', 'cfg_app_type', 'sys_guest', 'sys_guest_phoneinfo', 'sys_user', 'sys_user_app', 'sys_user_ext', 'sys_user_phoneinfo'"
+
 EXE_MYSQL="mysql -h${HOST} -u${USER} -p${PASSWORD} --default-character-set=utf8 -A -N"
 
 #all
 # and table_name in (${pointTables})
 function tables(){
 mysql -u${USER} -p${PASSWORD} -P${PORT} -h${HOST} -D${DATABASE} >${EXPORT_PATH}/tabless.txt << EOF
-    select table_name from information_schema.tables where table_schema="${DATABASE}" #and table_name in (${pointTables})
+    select table_name from information_schema.tables where table_schema="${DATABASE}" and table_name in (${pointTables})
 EOF
 sed -e '/table_name/d' ${EXPORT_PATH}/tabless.txt >${EXPORT_PATH}/tables.txt
 rm -rf ${EXPORT_PATH}/tabless.txt
@@ -26,7 +28,7 @@ rm -rf ${EXPORT_PATH}/tabless.txt
 #
 function tablecount(){
 for line in $(cat ${EXPORT_PATH}/tables.txt);do
-sql="select count(*) from ${DATABASE}.${line}"
+sql="select count(1) from ${DATABASE}.${line}"
 result="$($EXE_MYSQL -e "${sql}")"
 echo  "${line}:${result}" >>${EXPORT_PATH}/tablescount_${TIMESTAMP}.txt
 done
@@ -117,8 +119,9 @@ echo -e "$tables_incrementstr" >${EXPORT_PATH}/tables_increment.txt
 
 #incremant table export
 function backupIncrementTables(){
+mv ${EXPORT_PATH}/${DATABASE}/incr ${EXPORT_PATH}/${DATABASE}/incr_${TIMESTAMP}
 mkdir -p ${EXPORT_PATH}/${DATABASE}/incr
-echo  e `date` \n >>${EXPORT_PATH}/${DATABASE}/incr/${tablename}.txt
+#echo  e `date` \n >>${EXPORT_PATH}/${DATABASE}/incr/${tablename}.txt
 tables_increments=`ls -l $EXPORT_PATH | grep tables_increment | tail -n 1 | awk '{print $9}'`
 for line in $(cat ${EXPORT_PATH}/${tables_increments});do
 array=(${line//:/ })
@@ -128,18 +131,18 @@ tablecountincr=${array[2]}
 if [[ "$tablename" != "table_name" ]];then
 sql="select * from ${DATABASE}.${tablename} limit  ${tablecount}, ${tablecountincr}"
 result="$($EXE_MYSQL -e "${sql}")"
-echo  "${line}:${result}" >>${EXPORT_PATH}/${DATABASE}/incr/${tablename}.txt
+echo  "${result}" >>${EXPORT_PATH}/${DATABASE}/incr/${tablename}.txt
 fi
 done
 }
 
 #
 function main(){
-tables
-tablecount
-backupAllTables
-#compareFile
-#compareContext
-#backupIncrementTables
+tables #要导出的表统计
+tablecount #要导出的表的计录条数据
+#backupAllTables #备份所有指定表 当第一全导出的时候去掉#
+compareFile #比较增量条数据
+compareContext #增量内容
+backupIncrementTables #备份增量内容
 }
 main
